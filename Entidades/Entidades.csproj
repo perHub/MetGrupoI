@@ -37,14 +37,18 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Administradores.cs" />
+    <Compile Include="Desarrolladores.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Estados-Tareas.cs" />
     <Compile Include="Estados.cs" />
     <Compile Include="Habilidades.cs" />
     <Compile Include="Historias.cs" />
+    <Compile Include="Invitados.cs" />
     <Compile Include="Proyectos.cs" />
     <Compile Include="Sprints.cs" />
     <Compile Include="Tareas.cs" />
+    <Compile Include="Usuarios-Sistemas.cs" />
     <Compile Include="Usuarios.cs" />
   </ItemGroup>
   <ItemGroup>
