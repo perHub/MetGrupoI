@@ -8,7 +8,9 @@ namespace Entidades
     class Sprints
     {
         int id;
-
+        int proyecto;
+        DateTime inicio;
+        DateTime fin;
         String nombre;
 
         public int Id
@@ -16,21 +18,20 @@ namespace Entidades
             get { return id; }
             set { id = value; }
         }
-        int proyecto;
 
         public int Proyecto
         {
             get { return proyecto; }
             set { proyecto = value; }
         }
-        DateTime incio;
+
 
         public DateTime Incio
         {
-            get { return incio; }
-            set { incio = value; }
+            get { return inicio; }
+            set { inicio = value; }
         }
-        DateTime fin;
+
 
         public DateTime Fin
         {
@@ -42,6 +43,17 @@ namespace Entidades
         {
             get { return nombre; }
             set { nombre = value; }
+        }
+        public Sprints() { 
+            
+        }
+        public Sprints(int id, int proyecto, DateTime inicio,DateTime fin,string nombre)
+        {
+            this.id = id;
+            this.proyecto = proyecto;
+            this.inicio = inicio;
+            this.fin = fin;
+            this.nombre = nombre;
         }
 
     }
