@@ -27,7 +27,7 @@ namespace Entidades
 
         public Habilidades(int id, string nombre) {
             this.id = id;
-            this.nombre = nomrbe;
+            this.nombre = nombre;
         }
     }
 }
