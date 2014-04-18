@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Invitados:Usuarios
+    public class Invitados:Usuarios
     {
         public Invitados() { 
         

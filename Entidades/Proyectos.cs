@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Proyectos
+    public class Proyectos
     {
         int id;
         string nombre;

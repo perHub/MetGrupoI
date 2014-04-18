@@ -3,14 +3,28 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        <asp:ListView ID="ListView1" runat="server">
-        <ItemTemplate>
-                        <asp:Label ID="L1" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Historias.Descripcion")%>'></asp:Label>
-						<asp:Label ID="L2" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Historias.Estimacion")%>'></asp:Label>
-						<asp:Label ID="L3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Historias.Prioridad")%>'></asp:Label>
-        </ItemTemplate>
-
-        </asp:ListView>
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+            CellPadding="4" ForeColor="#333333" Height="251px" Width="728px">
+            <AlternatingRowStyle BackColor="White" />
+            <Columns>
+                <asp:BoundField DataField="Descripcion" HeaderText="Historia">
+                <HeaderStyle Height="30px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Estimacion" HeaderText="Estimación" />
+                <asp:BoundField DataField="Prioridad" HeaderText="Prioridad" />
+            </Columns>
+            <EditRowStyle BackColor="#2461BF" />
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#EFF3FB" />
+            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+        </asp:GridView>
+    <br />
         
     </p>
 

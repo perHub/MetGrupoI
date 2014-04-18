@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    abstract class Usuarios_Sistemas:Usuarios
+    abstract public class Usuarios_Sistemas:Usuarios
     {
         List<Habilidades> listaHabilidades;
 

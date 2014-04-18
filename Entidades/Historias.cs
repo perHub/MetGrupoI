@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Historias
+    public class Historias
     {
         int id;
         List<Historias> depende;

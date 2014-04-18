@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Tareas
+    public class Tareas
     {
         int id;
         String descripcion;

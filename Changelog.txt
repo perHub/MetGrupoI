@@ -1,0 +1,1 @@
+18/04 00:17 Agregado ListView funcional en el template, clases de las entidades declaradas como públicas.

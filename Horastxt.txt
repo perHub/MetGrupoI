@@ -1,4 +1,4 @@
 Horas
 
 dia			Pedro			Nicolas			Yanina
-17/04										3,5
+17/04		  4								3,5

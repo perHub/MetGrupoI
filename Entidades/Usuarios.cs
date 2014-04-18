@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    abstract class Usuarios
+    abstract public class Usuarios
     {
         int id;
         String descripcion;

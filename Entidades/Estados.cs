@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Estados
+    public class Estados
     {
         int id;
         string nombre;

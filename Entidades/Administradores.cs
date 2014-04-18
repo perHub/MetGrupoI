@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Administradores:Usuarios_Sistemas
+    public class Administradores:Usuarios_Sistemas
     {
         public Administradores(int id, string descripcion,int empresa,string nombre, string password, List<Habilidades >listaHabilidades) {
             this.Id = id;

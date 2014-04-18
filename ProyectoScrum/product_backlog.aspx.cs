@@ -12,7 +12,16 @@ namespace ProyectoScrum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //List<Historias> lstHU = new List<Entidades.Historias>();
+            List<Historias> lstHU = new List<Entidades.Historias>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                Historias HU = new Historias(i, null, "Desc " + i, i * 5, 20 - i, 0, 0);
+                lstHU.Add(HU);
+            }
+
+            GridView1.DataSource = lstHU;
+            GridView1.DataBind();
         }
 
 

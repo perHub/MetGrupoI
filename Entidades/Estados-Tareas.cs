@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Estados_Tareas
+    public class Estados_Tareas
     {
         int estadoActual;
         int estadoAnterior;

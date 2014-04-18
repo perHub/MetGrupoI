@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Habilidades
+    public class Habilidades
     {
         int id;
         string nombre;

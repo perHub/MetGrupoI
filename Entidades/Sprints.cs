@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    class Sprints
+    public class Sprints
     {
         int id;
         int proyecto;
