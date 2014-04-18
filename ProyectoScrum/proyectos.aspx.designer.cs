@@ -10,15 +10,15 @@
 namespace ProyectoScrum {
     
     
-    public partial class sprints {
+    public partial class proyectos {
         
         /// <summary>
-        /// btnNuSprint control.
+        /// btnNueProyect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNuSprint;
+        protected global::System.Web.UI.WebControls.Button btnNueProyect;
     }
 }

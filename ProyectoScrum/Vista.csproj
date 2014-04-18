@@ -57,6 +57,9 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="historias_usuario.aspx" />
+    <Content Include="nuevo_sprint.aspx" />
+    <Content Include="product_backlog.aspx" />
+    <Content Include="proyectos.aspx" />
     <Content Include="sprints.aspx" />
     <Content Include="sprint_actual.aspx" />
     <Content Include="Styles\Site.css" />
@@ -126,7 +129,28 @@
     <Compile Include="historias_usuario.aspx.designer.cs">
       <DependentUpon>historias_usuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="nuevo_sprint.aspx.cs">
+      <DependentUpon>nuevo_sprint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nuevo_sprint.aspx.designer.cs">
+      <DependentUpon>nuevo_sprint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="product_backlog.aspx.cs">
+      <DependentUpon>product_backlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="product_backlog.aspx.designer.cs">
+      <DependentUpon>product_backlog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="proyectos.aspx.cs">
+      <DependentUpon>proyectos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="proyectos.aspx.designer.cs">
+      <DependentUpon>proyectos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

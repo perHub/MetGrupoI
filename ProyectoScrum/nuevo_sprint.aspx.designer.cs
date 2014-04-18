@@ -10,51 +10,42 @@
 namespace ProyectoScrum {
     
     
-    public partial class SiteMaster {
+    public partial class nuevo_sprint {
         
         /// <summary>
-        /// HeadContent control.
+        /// txtNomSprint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        protected global::System.Web.UI.WebControls.TextBox txtNomSprint;
         
         /// <summary>
-        /// NavProyectos control.
+        /// txtInicSprint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu NavProyectos;
+        protected global::System.Web.UI.WebControls.TextBox txtInicSprint;
         
         /// <summary>
-        /// HeadLoginView control.
+        /// txtFinSprint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView HeadLoginView;
+        protected global::System.Web.UI.WebControls.TextBox txtFinSprint;
         
         /// <summary>
-        /// NavigationMenu control.
+        /// btnCrearSprint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu NavigationMenu;
-        
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button btnCrearSprint;
     }
 }
