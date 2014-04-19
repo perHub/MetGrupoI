@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using Entidades;
 
 namespace ProyectoScrum
 {
@@ -30,7 +31,10 @@ namespace ProyectoScrum
 
         void Session_Start(object sender, EventArgs e)
         {
-            // Code that runs when a new session is started
+            // Declaro las variables de sesión acá para listar las que vamos a utilizar.
+
+            Session["prodBacklog"] = new List<Historias>();
+            Session["sprintBacklog"] = new List<Historias>();
 
         }
 

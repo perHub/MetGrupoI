@@ -36,9 +36,10 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/sprints.aspx" Text="Sprints"/>
-                        <asp:MenuItem NavigateUrl="~/sprint_actual.aspx" Text="Sprint actual"/>
                         <asp:MenuItem NavigateUrl="~/product_backlog.aspx" Text="Product backlog"/>
+                        <asp:MenuItem NavigateUrl="~/sprints.aspx" Text="Sprints" Enabled="True" />
+                        <asp:MenuItem NavigateUrl="~/sprint_actual.aspx" Text="Sprint actual"/>
+                        <asp:MenuItem NavigateUrl="~/sprint_backlog.aspx" Text="Sprint backlog"/>
                     </Items>
                 </asp:Menu>
             </div>

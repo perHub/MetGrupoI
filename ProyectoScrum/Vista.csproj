@@ -62,6 +62,7 @@
     <Content Include="proyectos.aspx" />
     <Content Include="sprints.aspx" />
     <Content Include="sprint_actual.aspx" />
+    <Content Include="sprint_backlog.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -122,6 +123,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="gvHU.master.cs">
+      <DependentUpon>gvHU.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gvHU.master.designer.cs">
+      <DependentUpon>gvHU.master</DependentUpon>
+    </Compile>
     <Compile Include="historias_usuario.aspx.cs">
       <DependentUpon>historias_usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -172,6 +180,13 @@
     <Compile Include="sprint_actual.aspx.designer.cs">
       <DependentUpon>sprint_actual.aspx</DependentUpon>
     </Compile>
+    <Compile Include="sprint_backlog.aspx.cs">
+      <DependentUpon>sprint_backlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sprint_backlog.aspx.designer.cs">
+      <DependentUpon>sprint_backlog.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -189,6 +204,9 @@
       <Project>{1DC813FB-DE15-4C6D-BC6C-AFCDA1860CB7}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gvHU.master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -2,7 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:Button ID="btnNuSprint" runat="server" Text="Nuevo sprint" Width="91px" OnClick="~/nuevo_sprint.aspx"  />
+
+    <a href="nuevo_sprint.aspx">Nuevo sprint</a>
     <br />
     <br /><b>Sprints actuales</b>
     <br />&nbsp;&nbsp;&nbsp;

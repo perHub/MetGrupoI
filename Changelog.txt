@@ -1,1 +1,4 @@
-18/04 00:17 Agregado ListView funcional en el template, clases de las entidades declaradas como públicas.
+Pedro: 18/04 - El sprint backlog y el product backlog comparten la misma Master Page con una grilla que será cargada por listas de HU.
+			 - Agregada la interfaz del DAO (IDAO) (posiblemente falten métodos).
+			 
+Pedro: 17/04 Agregado GridView funcional en el template, clases de las entidades declaradas como públicas.
