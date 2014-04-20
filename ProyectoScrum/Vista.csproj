@@ -57,6 +57,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="historias_usuario.aspx" />
+    <Content Include="nueva_tarea.aspx" />
     <Content Include="nuevo_sprint.aspx" />
     <Content Include="product_backlog.aspx" />
     <Content Include="proyectos.aspx" />
@@ -136,6 +137,13 @@
     </Compile>
     <Compile Include="historias_usuario.aspx.designer.cs">
       <DependentUpon>historias_usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="nueva_tarea.aspx.cs">
+      <DependentUpon>nueva_tarea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nueva_tarea.aspx.designer.cs">
+      <DependentUpon>nueva_tarea.aspx</DependentUpon>
     </Compile>
     <Compile Include="nuevo_sprint.aspx.cs">
       <DependentUpon>nuevo_sprint.aspx</DependentUpon>

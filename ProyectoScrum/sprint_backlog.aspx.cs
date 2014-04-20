@@ -14,6 +14,7 @@ namespace ProyectoScrum
         {
 
             List<Historias> lstHU = (List<Historias>)Session["sprintBacklog"];
+            lstHU.Clear();
 
             for (int i = 0; i < 5; i++)
             {
