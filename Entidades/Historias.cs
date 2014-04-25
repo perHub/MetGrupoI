@@ -15,6 +15,9 @@ namespace Entidades
         int proyecto;
         int sprint; //solo un sprint? consultar
 
+        DateTime inicio;
+        DateTime fin;
+
         public int Id
         {
             get { return id; }
@@ -56,6 +59,19 @@ namespace Entidades
             get { return sprint; }
             set { sprint = value; }
         }
+
+        public DateTime Inicio
+        {
+            get { return inicio; }
+            set { inicio = value; }
+        }
+
+        public DateTime Fin
+        {
+            get { return fin; }
+            set { fin = value; }
+        }
+
         public Historias() { 
         
         }
@@ -68,5 +84,15 @@ namespace Entidades
             this.proyecto = proyecto;
             this.sprint = sprint;
         }
+        public Historias(int id, string descripcion, decimal estimacion, int prioridad, int sprint, DateTime inicio)
+        {
+            this.id = id;
+            this.descripcion = descripcion;
+            this.estimacion = estimacion;
+            this.prioridad = prioridad;
+            this.sprint = sprint;
+            this.Inicio = inicio;
+        }
+
     }
 }

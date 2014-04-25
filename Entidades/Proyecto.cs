@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Proyectos
+    public class Proyecto
     {
         int id;
         string nombre;
+        int idempresa;
 
         public int Id
         {
@@ -21,11 +22,19 @@ namespace Entidades
             get { return nombre; }
             set { nombre = value; }
         }
-        public Proyectos() { }
 
-        public Proyectos(int id, string nombre) {
-            this.id = id;
-            this.nombre = nombre;
+        public int IdEmpresa
+        {
+            get { return idempresa; }
+            set { idempresa = value; }
+        }
+
+        public Proyecto() { }
+
+        public Proyecto(int id, string nombre,int idemp) {
+            this.Id = id;
+            this.Nombre = nombre;
+            this.IdEmpresa = idemp;
         }
     }
 }

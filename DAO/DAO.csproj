@@ -43,10 +43,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conexion.cs" />
+    <Compile Include="DAOEmpresa.cs" />
+    <Compile Include="DAOProyecto.cs" />
+    <Compile Include="DAOSprint.cs" />
+    <Compile Include="DAOUsuario_Sistema.cs" />
     <Compile Include="IDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

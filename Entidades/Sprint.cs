@@ -5,13 +5,14 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Sprints
+    public class Sprint
     {
         int id;
-        int proyecto;
+        Proyecto proyecto;
         DateTime inicio;
         DateTime fin;
         String nombre;
+        List<Historias> historias;
 
         public int Id
         {
@@ -19,7 +20,7 @@ namespace Entidades
             set { id = value; }
         }
 
-        public int Proyecto
+        public Proyecto Proyecto
         {
             get { return proyecto; }
             set { proyecto = value; }
@@ -44,16 +45,32 @@ namespace Entidades
             get { return nombre; }
             set { nombre = value; }
         }
-        public Sprints() { 
+
+        public List<Historias> Historias
+        {
+            get { return historias; }
+            set { historias = value; }
+        }
+        public Sprint() { 
             
         }
-        public Sprints(int id, int proyecto, DateTime inicio,DateTime fin,string nombre)
+
+        public Sprint(int id, DateTime inicio, DateTime fin, string nombre)
+        {
+            this.id = id;
+            this.inicio = inicio;
+            this.fin = fin;
+            this.nombre = nombre;
+        }
+
+        public Sprint(int id, Proyecto proyecto, DateTime inicio,DateTime fin,string nombre, List<Historias> lista)
         {
             this.id = id;
             this.proyecto = proyecto;
             this.inicio = inicio;
             this.fin = fin;
             this.nombre = nombre;
+            this.Historias = lista;
         }
 
     }
