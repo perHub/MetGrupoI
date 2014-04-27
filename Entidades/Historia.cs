@@ -5,15 +5,29 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Historias
+    public class Historia
     {
         int id;
-        List<Historias> depende;
+        List<Historia> depende;
         string descripcion; 
         decimal estimacion;
         int prioridad;
-        int proyecto;
-        int sprint; //solo un sprint? consultar
+        DateTime inicio;
+
+        public DateTime Inicio
+        {
+            get { return inicio; }
+            set { inicio = value; }
+        }
+        DateTime fin;
+
+        public DateTime Fin
+        {
+            get { return fin; }
+            set { fin = value; }
+        }
+        Proyectos oproyecto;
+        Sprints osprint;
 
         public int Id
         {
@@ -21,7 +35,7 @@ namespace Entidades
             set { id = value; }
         }
 
-        internal List<Historias> Depende
+        internal List<Historia> Depende
         {
             get { return depende; }
             set { depende = value; }
@@ -45,28 +59,31 @@ namespace Entidades
             set { prioridad = value; }
         }
 
-        public int Proyecto
+        public Proyectos oProyecto
         {
-            get { return proyecto; }
-            set { proyecto = value; }
+            get { return oproyecto; }
+            set { oproyecto = value; }
         }
 
-        public int Sprint
+        public Sprints oSprint
         {
-            get { return sprint; }
-            set { sprint = value; }
+            get { return oSprint; }
+            set { oSprint = value; }
         }
-        public Historias() { 
+        public Historia() { 
         
         }
-        public Historias( int id, List<Historias> depende, string descripcion,decimal estimacion, int prioridad,int proyecto,int sprint){
+        public Historia( int id, List<Historia> depende, string descripcion,decimal estimacion, int prioridad,Proyectos proyecto, Sprints sprint,
+                            DateTime Inicio, DateTime Fin){
             this.id = id;
             this.depende = depende;
             this.descripcion=descripcion;
             this.estimacion=estimacion;
             this.prioridad = prioridad;
-            this.proyecto = proyecto;
-            this.sprint = sprint;
+            this.oproyecto = proyecto;
+            this.osprint = sprint;
+            this.inicio = Inicio;
+            this.fin = Fin;
         }
     }
 }

@@ -43,7 +43,7 @@
     <Compile Include="Estados-Tareas.cs" />
     <Compile Include="Estados.cs" />
     <Compile Include="Habilidades.cs" />
-    <Compile Include="Historias.cs" />
+    <Compile Include="Historia.cs" />
     <Compile Include="Invitados.cs" />
     <Compile Include="Proyectos.cs" />
     <Compile Include="Sprints.cs" />

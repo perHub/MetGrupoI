@@ -10,9 +10,9 @@ namespace ProyectoScrum
 {
     public partial class gvHU : System.Web.UI.MasterPage
     {
-        private static List<Historias> lstHistu;
+        private static List<Historia> lstHistu;
 
-        public static List<Historias> LstHistu
+        public static List<Historia> LstHistu
         {
             get { return lstHistu; }
             set { lstHistu = value; }

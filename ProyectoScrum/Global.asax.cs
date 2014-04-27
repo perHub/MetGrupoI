@@ -33,8 +33,8 @@ namespace ProyectoScrum
         {
             // Declaro las variables de sesión acá para listar las que vamos a utilizar.
 
-            Session["prodBacklog"] = new List<Historias>();
-            Session["sprintBacklog"] = new List<Historias>();
+            Session["prodBacklog"] = new List<Historia>();
+            Session["sprintBacklog"] = new List<Historia>();
 
         }
 

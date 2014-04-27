@@ -12,13 +12,13 @@ namespace ProyectoScrum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Historias> lstHU = (List<Historias>)Session["prodBacklog"];
+            List<Historia> lstHU = (List<Historia>)Session["prodBacklog"];
 
             lstHU.Clear();
 
             for (int i = 0; i < 10; i++)
             {
-                Historias HU = new Historias(i, null, "Historia " + i, i * 5, 20 - i, 0, 0);
+                Historia HU = new Historia(i, null, "Historia " + i, i * 5, 20 - i, 0, 0);
                 lstHU.Add(HU);
             }
             gvHU.LstHistu = lstHU;
