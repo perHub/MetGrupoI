@@ -23,7 +23,7 @@ namespace DAO
             return _instance;
         }
 
-        public void Agregar(Empresa miEmpresa)
+        public void agregar(Empresa miEmpresa)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace DAO
 
 
         }
-        public void Eliminar(Empresa miEmpresa)
+        public void eliminar(Empresa miEmpresa)
         {
             try
             {
@@ -67,5 +67,51 @@ namespace DAO
 
         }
 
+
+
+        public void modificar(int ID, Empresa data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Empresa buscarPorID(int ID)
+        {
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select * from Empresas where id=@ID");
+                query.Parameters.Add(new SqlParameter("@ID",System.Data.SqlDbType.Int));
+                SqlDataReader reader = query.ExecuteReader();
+
+                int id;
+                String dir;
+                String nom;
+
+                if (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                    dir = reader.GetString(1);
+                    nom = reader.GetString(2);
+
+                    return new Empresa(id, dir, nom);
+                }
+                else throw new Exception("Esa empresa no existe.");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally{
+                Conexion.close();
+            }
+        }
+
+
+        public List<Empresa> traerTodos()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

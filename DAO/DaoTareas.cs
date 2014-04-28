@@ -8,30 +8,30 @@ using System.Data.SqlClient;
 
 namespace DAO
 {
-    class DaoTareas, IDAO<Tareas>
+    class DaoTareas : IDAO<Tarea>
     {
-       /* public void Eliminar(Tareas tarea)
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("UPDATE Usuarios SET Baja = 1 WHERE IdUsuario = @IdUsuario", Conexion.cn);
-                cmd.Parameters.Add("@IdUsuario", System.Data.SqlDbType.Int);
-                //ahora los completo
-                cmd.Parameters["@IdUsuario"].Value = usu.IdUsuario;
-                cmd.ExecuteNonQuery();
-                //Conexion.close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Conexion.close();
-            }
-        }*/
+        /* public void Eliminar(Tarea tarea)
+         {
+             try
+             {
+                 SqlCommand cmd = new SqlCommand("UPDATE Usuarios SET Baja = 1 WHERE IdUsuario = @IdUsuario", Conexion.cn);
+                 cmd.Parameters.Add("@IdUsuario", System.Data.SqlDbType.Int);
+                 //ahora los completo
+                 cmd.Parameters["@IdUsuario"].Value = usu.IdUsuario;
+                 cmd.ExecuteNonQuery();
+                 //Conexion.close();
+             }
+             catch (Exception ex)
+             {
+                 Console.WriteLine(ex.Message);
+             }
+             finally
+             {
+                 Conexion.close();
+             }
+         }*/
 
-        public void Modificar(int id,Tareas tarea)
+        public void modificar(int id, Tarea tarea)
         {
             try
             {
@@ -68,35 +68,57 @@ namespace DAO
             }
         }
 
-/*
-        public void Agregar(Sprints spr)
+        /*
+                public void Agregar(Sprints spr)
+                {
+                    try
+                    {
+                        Conexion.open();
+                        SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Id,Descripcion,Estado,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones) VALUES (@Id,@Descripcion,@Estado,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones)"), Conexion.cn);
+                        //paso parametros
+                        cmdAgregar.Parameters.Add("@IdProyecto", System.Data.SqlDbType.Int);
+                        cmdAgregar.Parameters.Add("@Inicio", System.Data.SqlDbType.DateTime);
+                        cmdAgregar.Parameters.Add("@Fin", System.Data.SqlDbType.DateTime);
+                        cmdAgregar.Parameters.Add("@Nombre", System.Data.SqlDbType.VarChar);
+                        //ahora los completo
+                        cmdAgregar.Parameters["@IdProyecto"].Value = spr.Proyecto;
+                        cmdAgregar.Parameters["@Inicio"].Value = spr.Incio;
+                        cmdAgregar.Parameters["@Fin"].Value = spr.Fin;
+                        cmdAgregar.Parameters["@Nombre"].Value = spr.Nombre;
+                        cmdAgregar.ExecuteNonQuery();
+                        Conexion.close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        Conexion.close();
+                    }
+                }
+
+            }*/
+
+        public void agregar(Tarea data)
         {
-            try
-            {
-                Conexion.open();
-                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Id,Descripcion,Estado,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones) VALUES (@Id,@Descripcion,@Estado,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones)"), Conexion.cn);
-                //paso parametros
-                cmdAgregar.Parameters.Add("@IdProyecto", System.Data.SqlDbType.Int);
-                cmdAgregar.Parameters.Add("@Inicio", System.Data.SqlDbType.DateTime);
-                cmdAgregar.Parameters.Add("@Fin", System.Data.SqlDbType.DateTime);
-                cmdAgregar.Parameters.Add("@Nombre", System.Data.SqlDbType.VarChar);
-                //ahora los completo
-                cmdAgregar.Parameters["@IdProyecto"].Value = spr.Proyecto;
-                cmdAgregar.Parameters["@Inicio"].Value = spr.Incio;
-                cmdAgregar.Parameters["@Fin"].Value = spr.Fin;
-                cmdAgregar.Parameters["@Nombre"].Value = spr.Nombre;
-                cmdAgregar.ExecuteNonQuery();
-                Conexion.close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Conexion.close();
-            }
+            throw new NotImplementedException();
         }
 
-    }*/
+        public void eliminar(Tarea data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Tarea buscarPorID(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Tarea> traerTodos()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
+ 

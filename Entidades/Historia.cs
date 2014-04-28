@@ -8,11 +8,13 @@ namespace Entidades
     public class Historia
     {
         int id;
-        List<Historia> depende;
+        //List<Historia> depende;
         string descripcion; 
         decimal estimacion;
         int prioridad;
         DateTime inicio;
+        Proyecto oproyecto;
+        Sprint osprint;
 
         public DateTime Inicio
         {
@@ -26,8 +28,6 @@ namespace Entidades
             get { return fin; }
             set { fin = value; }
         }
-        Proyectos oproyecto;
-        Sprints osprint;
 
         public int Id
         {
@@ -35,12 +35,7 @@ namespace Entidades
             set { id = value; }
         }
 
-        internal List<Historia> Depende
-        {
-            get { return depende; }
-            set { depende = value; }
-        }
-        
+
         public string Descripcion
         {
             get { return descripcion; }
@@ -59,13 +54,13 @@ namespace Entidades
             set { prioridad = value; }
         }
 
-        public Proyectos oProyecto
+        public Proyecto oProyecto
         {
             get { return oproyecto; }
             set { oproyecto = value; }
         }
 
-        public Sprints oSprint
+        public Sprint oSprint
         {
             get { return oSprint; }
             set { oSprint = value; }
@@ -73,10 +68,10 @@ namespace Entidades
         public Historia() { 
         
         }
-        public Historia( int id, List<Historia> depende, string descripcion,decimal estimacion, int prioridad,Proyectos proyecto, Sprints sprint,
+        public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
                             DateTime Inicio, DateTime Fin){
             this.id = id;
-            this.depende = depende;
+            //this.depende = depende;
             this.descripcion=descripcion;
             this.estimacion=estimacion;
             this.prioridad = prioridad;

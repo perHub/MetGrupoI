@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Entidades
 {
-    abstract public class Usuarios_Sistemas:Usuarios
+    abstract public class UsuarioSistema:Usuario
     {
-        List<Habilidades> listaHabilidades;
+        List<Habilidad> listaHabilidades;
 
-        internal List<Habilidades> ListaHabilidades
+        internal List<Habilidad> ListaHabilidades
         {
             get { return listaHabilidades; }
             set { listaHabilidades = value; }

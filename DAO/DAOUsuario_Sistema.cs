@@ -7,10 +7,10 @@ using Entidades;
 
 namespace DAO
 {
-    public class DAOUsuario_Sistema : IDAO<Usuarios_Sistemas>
+    public class DAOUsuario_Sistema : IDAO<UsuarioSistema>
     {
         private static DAOUsuario_Sistema _instance;
-        List<Usuarios_Sistemas> lUsuarios = new List<Usuarios_Sistemas>();
+        List<UsuarioSistema> lUsuarios = new List<UsuarioSistema>();
 
         public static DAOUsuario_Sistema Instance()
         {
@@ -22,7 +22,7 @@ namespace DAO
             }
             return _instance;
         }
-/*        public void Agregar(Usuarios_Sistemas usu)
+/*        public void agregar(UsuarioSistema usu)
         {
             try
             {
@@ -408,6 +408,31 @@ namespace DAO
             }
         }
 */
+
+        public void agregar(UsuarioSistema data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void eliminar(UsuarioSistema data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void modificar(int ID, UsuarioSistema data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UsuarioSistema buscarPorID(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<UsuarioSistema> traerTodos()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

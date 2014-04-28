@@ -12,7 +12,14 @@ namespace Entidades
         DateTime inicio;
         DateTime fin;
         String nombre;
-        List<Historias> historias;
+       List<Historia> historias;
+       List<Tarea> tareas;
+
+       public List<Tarea> Tareas
+       {
+           get { return tareas; }
+           set { tareas = value; }
+       }
 
         public int Id
         {
@@ -46,7 +53,7 @@ namespace Entidades
             set { nombre = value; }
         }
 
-        public List<Historias> Historias
+        public List<Historia> Historias
         {
             get { return historias; }
             set { historias = value; }
@@ -63,7 +70,7 @@ namespace Entidades
             this.nombre = nombre;
         }
 
-        public Sprint(int id, Proyecto proyecto, DateTime inicio,DateTime fin,string nombre, List<Historias> lista)
+        public Sprint(int id, Proyecto proyecto, DateTime inicio,DateTime fin,string nombre, List<Historia> lista)
         {
             this.id = id;
             this.proyecto = proyecto;

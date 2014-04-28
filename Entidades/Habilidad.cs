@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Habilidades
+    public class Habilidad
     {
         int id;
         string nombre;
@@ -22,10 +22,10 @@ namespace Entidades
             get { return nombre; }
             set { nombre = value; }
         }
-        public Habilidades(){
+        public Habilidad(){
         }
 
-        public Habilidades(int id, string nombre) {
+        public Habilidad(int id, string nombre) {
             this.id = id;
             this.nombre = nombre;
         }

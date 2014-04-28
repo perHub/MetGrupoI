@@ -15,10 +15,11 @@ namespace ProyectoScrum
 
             List<Historia> lstHU = (List<Historia>)Session["sprintBacklog"];
             lstHU.Clear();
+            DateTime test = new DateTime();
 
             for (int i = 0; i < 5; i++)
             {
-                Historia HU = new Historia(i, null, "Historia " + i, i * 5, 20 - i, 0, 0);
+                Historia HU = new Historia(i, "Historia " + i, i * 5, 20 - i, null,null,  test, test);
                 lstHU.Add(HU);
             }
             gvHU.LstHistu = lstHU;

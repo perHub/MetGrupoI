@@ -7,7 +7,7 @@ using Entidades;
 
 namespace DAO
 {
-    public class DAOSprint : IDAO<DAOSprint>
+    public class DAOSprint : IDAO<Sprint>
     {
         private static DAOSprint _instance;
         List<Sprint> listSprints = new List<Sprint>();
@@ -23,7 +23,7 @@ namespace DAO
             return _instance;
         }
 
-        public void Agregar(Sprint spr)
+        public void agregar(Sprint spr)
         {
             try
             {
@@ -52,11 +52,11 @@ namespace DAO
             }
         }
           
-            public List<Historias> SprintBackLog(Sprint miSprint)
+            public List<Historia> SprintBackLog(Sprint miSprint)
             {
                 try
                 {
-                    List<Historias> listHistorias = new List<Historias>();
+                    List<Historia> listHistorias = new List<Historia>();
                     SqlCommand cmd = new SqlCommand("SELECT HI.Descripcion,HI.Estimacion,HI.Prioridad,HI.Inicio,SP.ID as IdSprint,HI.Id as ID"+
                     "FROM HISTORIAS as HI JOIN SPRINTS as SP ON HI.IdSprint = SP.Id WHERE SP.Id = @IdSprint", Conexion.cn);
                     Conexion.open();
@@ -78,8 +78,8 @@ namespace DAO
                         dInicio = reader.GetDateTime(3);
                         nIdSprint = reader.GetInt32(4);
                         nId = reader.GetInt32(5);
-                        Historias hist = new Historias(nId,cDescripcion,nEstimacion,nPrioridad,nId,dInicio);
-                        listHistorias.Add(hist);
+                        //Historia hist = new Historia(nId,cDescripcion,nEstimacion,nPrioridad,nId,dInicio);
+                        //listHistorias.Add(hist);
                     }
 
                     reader.Close();
@@ -88,7 +88,7 @@ namespace DAO
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    throw ex;
                 }
                 finally
                 {
@@ -117,7 +117,7 @@ namespace DAO
                 }
             }*/
 
-            public void Modificar(Sprint sprint)
+            public void modificar(Sprint sprint)
             {
                 try
                 {
@@ -177,7 +177,7 @@ namespace DAO
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    throw ex;
                 }
                 finally
                 {
@@ -185,6 +185,26 @@ namespace DAO
                 }
             }
 
+
+            public void eliminar(Sprint data)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void modificar(int ID, Sprint data)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Sprint buscarPorID(int ID)
+            {
+                return miSprint(1); //Debería ser este método directamente, consultar.
+            }
+
+            public List<Sprint> traerTodos()
+            {
+                throw new NotImplementedException();
+            }
     }
 
 }

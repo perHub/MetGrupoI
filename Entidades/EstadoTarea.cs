@@ -5,21 +5,21 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Estados_Tareas
+    public class EstadoTarea
     {
-        int estadoActual;
-        int estadoAnterior;
+        Estado estadoActual;
+        Estado estadoAnterior;
         DateTime fecha;
         String observaciones;
         int tarea;
 
-        public int EstadoActual
+        public Estado EstadoActual
         {
             get { return estadoActual; }
             set { estadoActual = value; }
         }
 
-        public int EstadoAnterior
+        public Estado EstadoAnterior
         {
             get { return estadoAnterior; }
             set { estadoAnterior = value; }
@@ -40,10 +40,10 @@ namespace Entidades
             get { return tarea; }
             set { tarea = value; }
         }
-        public Estados_Tareas() { 
+        public EstadoTarea() { 
         
         }
-        public Estados_Tareas(int estadoActual, int estadoAnterior, DateTime fecha, int tarea,string observaciones)
+        public EstadoTarea(Estado estadoActual, Estado estadoAnterior, DateTime fecha, int tarea,string observaciones)
         {
             this.estadoActual = estadoActual;
             this.EstadoAnterior = estadoAnterior;

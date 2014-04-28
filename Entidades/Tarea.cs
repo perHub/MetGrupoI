@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Tareas
+    public class Tarea
     {
         int id;
         String descripcion;
@@ -13,12 +13,12 @@ namespace Entidades
         decimal estimacion;
         DateTime fin;
         DateTime inicio;
-        Historias historia;
+        Historia historia;
         string observaciones;
-        Usuarios_Sistemas owner;
-        List<Estados_Tareas> listaDeEstados;
+        UsuarioSistema owner;
+        List<EstadoTarea> listaDeEstados;
 
-        public List<Estados_Tareas> ListaDeEstados
+        public List<EstadoTarea> ListaDeEstados
         {
             get { return listaDeEstados; }
             set { listaDeEstados = value; }
@@ -61,7 +61,7 @@ namespace Entidades
             set { inicio = value; }
         }
 
-        public Historias Historia
+        public Historia Historia
         {
             get { return historia; }
             set { historia = value; }
@@ -73,15 +73,15 @@ namespace Entidades
             set { observaciones = value; }
         }
 
-        public Usuarios_Sistemas Owner
+        public UsuarioSistema Owner
         {
             get { return owner; }
             set { owner = value; }
         }
-        public Tareas(){
+        public Tarea(){
         }
 
-        public Tareas(int id, string descripcion, string estado, decimal estimacion,DateTime fin,DateTime inicio,int historia,string observaciones, int owner) {
+        public Tarea(int id, string descripcion, string estado, decimal estimacion,DateTime fin,DateTime inicio, Historia historia,string observaciones, UsuarioSistema owner) {
             this.id = id;
             this.descripcion = descripcion;
             this.estado = estado;

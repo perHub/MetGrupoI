@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Estados
+    public class Estado
     {
         int id;
         string nombre;
@@ -21,10 +21,10 @@ namespace Entidades
            get { return id; }
            set { id = value; }
        }
-       public Estados() { 
+       public Estado() { 
            
        }
-       public Estados(int id, string nombre) {
+       public Estado(int id, string nombre) {
            this.id = id;
            this.nombre = nombre;
        }

@@ -9,7 +9,7 @@ namespace Entidades
     {
         int id;
         string nombre;
-        int idempresa;
+        Empresa oempresa;
 
         public int Id
         {
@@ -23,18 +23,18 @@ namespace Entidades
             set { nombre = value; }
         }
 
-        public int IdEmpresa
+        public Empresa oEmpresa
         {
-            get { return idempresa; }
-            set { idempresa = value; }
+            get { return oempresa; }
+            set { oempresa = value; }
         }
 
         public Proyecto() { }
 
-        public Proyecto(int id, string nombre,int idemp) {
+        public Proyecto(int id, string nombre,Empresa oEmp) {
             this.Id = id;
             this.Nombre = nombre;
-            this.IdEmpresa = idemp;
+            this.oEmpresa = oEmp;
         }
     }
 }
