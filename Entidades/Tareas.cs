@@ -13,9 +13,16 @@ namespace Entidades
         decimal estimacion;
         DateTime fin;
         DateTime inicio;
-        int historia;
+        Historias historia;
         string observaciones;
-        int owner;
+        Usuarios_Sistemas owner;
+        List<Estados_Tareas> listaDeEstados;
+
+        public List<Estados_Tareas> ListaDeEstados
+        {
+            get { return listaDeEstados; }
+            set { listaDeEstados = value; }
+        }
 
 
         public int Id
@@ -54,7 +61,7 @@ namespace Entidades
             set { inicio = value; }
         }
 
-        public int Historia
+        public Historias Historia
         {
             get { return historia; }
             set { historia = value; }
@@ -66,7 +73,7 @@ namespace Entidades
             set { observaciones = value; }
         }
 
-        internal int Owner
+        public Usuarios_Sistemas Owner
         {
             get { return owner; }
             set { owner = value; }

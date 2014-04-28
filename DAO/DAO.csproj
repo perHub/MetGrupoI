@@ -44,6 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOHistorias.cs" />
+    <Compile Include="DAOEmpresa.cs" />
+    <Compile Include="DAOProyecto.cs" />
+    <Compile Include="DAOSprint.cs" />
+    <Compile Include="DAOUsuario_Sistema.cs" />
+    <Compile Include="DaoTareas.cs" />
     <Compile Include="IDAO.cs" />
   </ItemGroup>
   <ItemGroup>

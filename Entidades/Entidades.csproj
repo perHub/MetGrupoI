@@ -45,8 +45,8 @@
     <Compile Include="Habilidades.cs" />
     <Compile Include="Historia.cs" />
     <Compile Include="Invitados.cs" />
-    <Compile Include="Proyectos.cs" />
-    <Compile Include="Sprints.cs" />
+    <Compile Include="Proyecto.cs" />
+    <Compile Include="Sprint.cs" />
     <Compile Include="Tareas.cs" />
     <Compile Include="Usuarios-Sistemas.cs" />
     <Compile Include="Usuarios.cs" />
