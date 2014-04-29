@@ -93,5 +93,17 @@ namespace Entidades
             this.owner=owner;
         }
 
+        public Tarea(string descripcion, string estado, decimal estimacion, DateTime fin, DateTime inicio, Historia historia, string observaciones, UsuarioSistema owner)
+        {
+            this.descripcion = descripcion;
+            this.estado = estado;
+            this.estimacion = estimacion;
+            this.fin = fin;
+            this.inicio = inicio;
+            this.historia = historia;
+            this.observaciones = observaciones;
+            this.owner = owner;
+        }
+
     }
 }

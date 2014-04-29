@@ -96,27 +96,6 @@ namespace DAO
                 }
             }
 
-            /*public void Eliminar(Usuario usu)
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand("UPDATE Usuarios SET Baja = 1 WHERE IdUsuario = @IdUsuario", Conexion.cn);
-                    cmd.Parameters.Add("@IdUsuario", System.Data.SqlDbType.Int);
-                    //ahora los completo
-                    cmd.Parameters["@IdUsuario"].Value = usu.IdUsuario;
-                    cmd.ExecuteNonQuery();
-                    //Conexion.close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    Conexion.close();
-                }
-            }*/
-
             public void modificar(Sprint sprint)
             {
                 try

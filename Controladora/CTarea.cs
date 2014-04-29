@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DAO;
+using Entidades;
+using System.Data;
+
+namespace Controladora
+{
+    public class CTarea
+    {
+        DAOTarea dataTarea = DAOTarea.Instance();
+
+        public void agregar(String desc, String estado, decimal estima, DateTime ffin, DateTime fini, Historia hist, String obse, UsuarioSistema usu)
+        {
+            Tarea auxTarea = new Tarea(desc, estado, estima, ffin, fini, hist, obse, usu);
+            dataTarea.agregar(auxTarea);
+        }
+
+        public void eliminar(Tarea tarea)
+        {
+            dataTarea.eliminar(tarea);
+        }
+
+        public void modificar(int id, Tarea tarea)
+        {
+            dataTarea.eliminar(tarea);
+            dataTarea.agregar(tarea);
+        }
+
+    }
+}
