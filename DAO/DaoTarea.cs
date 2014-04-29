@@ -8,8 +8,24 @@ using System.Data.SqlClient;
 
 namespace DAO
 {
-    public class DaoTarea: IDAO<Tarea>
+    public class DAOTarea: IDAO<Tarea>
     {
+        private static DAOTarea _instance;
+
+        private DAOTarea()
+        {
+        }
+        public static DAOTarea Instance()
+        {
+            // Uses lazy initialization.
+            // Note: this is not thread safe.
+            if (_instance == null)
+            {
+                _instance = new DAOTarea();
+            }
+            return _instance;
+        }
+
         public void eliminar(Tarea tarea)
         {
             try
@@ -30,7 +46,7 @@ namespace DAO
             }
         }
 
-        public void modificar(int id,Tarea tarea)
+        public void modificar(int id, Tarea tarea)
         {
             try
             {
@@ -45,6 +61,7 @@ namespace DAO
                 cmdModificar.Parameters.Add("@IdHistoria", System.Data.SqlDbType.Int);
                 cmdModificar.Parameters.Add("@IdUsuario_Sistema", System.Data.SqlDbType.Int);
                 cmdModificar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
+                cmdModificar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
                 //ahora los completo
                 cmdModificar.Parameters["@Descripcion"].Value = tarea.Descripcion;
                 cmdModificar.Parameters["@Estado"].Value = tarea.Estado;
@@ -53,6 +70,7 @@ namespace DAO
                 cmdModificar.Parameters["@Fin"].Value = tarea.Fin;
                 cmdModificar.Parameters["@IdHistoria"].Value = tarea.Historia.Id;
                 cmdModificar.Parameters["@IdUsuario_Sistema"].Value = tarea.Owner.Id;
+                cmdModificar.Parameters["@Id"].Value = tarea.Id;
                 cmdModificar.Parameters["@Observaciones"].Value = tarea.Observaciones;
                 cmdModificar.ExecuteNonQuery();
                 Conexion.close();
