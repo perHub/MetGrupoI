@@ -198,7 +198,7 @@ namespace DAO
 
             public Sprint buscarPorID(int ID)
             {
-                return miSprint(1); //Debería ser este método directamente, consultar.
+                return miSprint(ID); //Debería ser este método directamente, consultar.
             }
 
             public List<Sprint> traerTodos()

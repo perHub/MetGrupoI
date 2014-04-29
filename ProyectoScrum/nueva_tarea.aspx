@@ -14,6 +14,9 @@
 
         Estado:
         <asp:DropDownList ID="dropdEst" runat="server">
+            <asp:ListItem>No iniciada</asp:ListItem>
+            <asp:ListItem>Iniciada</asp:ListItem>
+            <asp:ListItem>Finalizada</asp:ListItem>
         </asp:DropDownList>
         <div style="text-indent: 282px; width: 282px;"><asp:Button ID="btnCrear" 
                 runat="server" Text="Crear" onclick="btnCrear_Click" /> </div>

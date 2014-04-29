@@ -8,7 +8,7 @@ using Entidades;
 
 namespace DAO
 {
-    class DAOHistoria:IDAO<Historia>
+    public class DAOHistoria:IDAO<Historia>
     {
         private static DAOHistoria _instance;
 
@@ -103,14 +103,177 @@ namespace DAO
             }
         }
 
-        public List<Historia> traerTodos()
+        public List<Historia> traerTodos() 
         {
-            throw new NotImplementedException();
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select * from Historias");
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = new DAOSprint();
+
+                List<Historia> lstHu = new List<Historia>();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    String desc = reader.GetString(1);
+                    decimal est = reader.GetDecimal(2);
+                    int prio = reader.GetInt32(3);
+                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
+                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
+                    DateTime Inic = reader.GetDateTime(6);
+                    DateTime Fin = reader.GetDateTime(7);
+
+                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    lstHu.Add(hu);
+                }
+
+                return lstHu;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
         }
 
+        public List<Historia> historiasPorProyecto(int idproyecto)
+        {
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select * from Historias where IdProyecto=@id");
+                query.Parameters.AddWithValue("@id", idproyecto);
+
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = new DAOSprint();
+
+                List<Historia> lstHu = new List<Historia>();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    String desc = reader.GetString(1);
+                    decimal est = reader.GetDecimal(2);
+                    int prio = reader.GetInt32(3);
+                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
+                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
+                    DateTime Inic = reader.GetDateTime(6);
+                    DateTime Fin = reader.GetDateTime(7);
+
+                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    lstHu.Add(hu);
+                }
+
+                return lstHu;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        }
+
+        public List<Historia> historiasPorSrpint(int idsprint)
+        {
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select * from Historias where IdProyecto=@id");
+                query.Parameters.AddWithValue("@id", idsprint);
+
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = new DAOSprint();
+
+                List<Historia> lstHu = new List<Historia>();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    String desc = reader.GetString(1);
+                    decimal est = reader.GetDecimal(2);
+                    int prio = reader.GetInt32(3);
+                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
+                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
+                    DateTime Inic = reader.GetDateTime(6);
+                    DateTime Fin = reader.GetDateTime(7);
+
+                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    lstHu.Add(hu);
+                }
+
+                return lstHu;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        }
+
+        /*public List<Historia> retornarHistoriasQuery(String Sqlquery)
+        {
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand(Sqlquery);
+                query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.Int));
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = new DAOSprint();
+
+                List<Historia> lstHu = new List<Historia>();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    String desc = reader.GetString(1);
+                    decimal est = reader.GetDecimal(2);
+                    int prio = reader.GetInt32(3);
+                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
+                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
+                    DateTime Inic = reader.GetDateTime(6);
+                    DateTime Fin = reader.GetDateTime(7);
+
+                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    lstHu.Add(hu);
+                }
+
+                return lstHu;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }*/
+        }
        /* public List<Historia> traerDependencias()
         {
 
         }*/
     }
-}
+
