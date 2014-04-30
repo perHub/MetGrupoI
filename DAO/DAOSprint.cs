@@ -137,7 +137,7 @@ namespace DAO
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT Id,IdProyecto,Inicio,Fin,Nombre FROM Sprtins WHERE IdSprint=" + @id, Conexion.cn);
+                    SqlCommand cmd = new SqlCommand("SELECT Id,IdProyecto,Inicio,Fin,Nombre FROM Sprints WHERE Id=" + @id, Conexion.cn);
                     Conexion.open();
                     Sprint encontrado = null;
                     cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);

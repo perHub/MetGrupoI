@@ -113,8 +113,11 @@ namespace DAO
                     String desc = reader.GetString(1);
                     decimal est = reader.GetDecimal(2);
                     int prio = reader.GetInt32(3);
-                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
-                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
+                    int nIdProy = reader.GetInt32(4);
+                    Conexion.close();
+                    Proyecto oPro = DAOPro.buscarPorID(nIdProy);
+                    int nIdSpr = reader.GetInt32(5);
+                    Sprint oSpr = DAOSpr.buscarPorID(nIdSpr);
                     DateTime Inic = reader.GetDateTime(6);
                     DateTime Fin = reader.GetDateTime(7);
 
@@ -151,8 +154,12 @@ namespace DAO
                     String desc = reader.GetString(1);
                     decimal est = reader.GetDecimal(2);
                     int prio = reader.GetInt32(3);
-                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
-                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
+                    int nIdProy = reader.GetInt32(4);
+                    Conexion.close();
+                    Proyecto oPro = DAOPro.buscarPorID(nIdProy);
+                    int nIdSpr = reader.GetInt32(5);
+                    Conexion.close();
+                    Sprint oSpr = DAOSpr.buscarPorID(nIdSpr);
                     DateTime Inic = reader.GetDateTime(6);
                     DateTime Fin = reader.GetDateTime(7);
 
@@ -178,8 +185,9 @@ namespace DAO
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Historias where IdProyecto=@id");
+                SqlCommand query = new SqlCommand("select * from Historias where FIN IS NULL AND IdProyecto=@id", Conexion.cn);
                 query.Parameters.AddWithValue("@id", idproyecto);
+                query.Parameters["@id"].Value = idproyecto; ;
 
                 SqlDataReader reader = query.ExecuteReader();
 
@@ -188,17 +196,20 @@ namespace DAO
 
                 List<Historia> lstHu = new List<Historia>();
 
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32(0);
-                    String desc = reader.GetString(1);
-                    decimal est = reader.GetDecimal(2);
-                    int prio = reader.GetInt32(3);
-                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
-                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
-                    DateTime Inic = reader.GetDateTime(6);
-                    DateTime Fin = reader.GetDateTime(7);
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                Conexion.close();
 
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["Id"]);
+                    String desc = Convert.ToString(dr["Descripcion"]);
+                    decimal est = Convert.ToDecimal(dr["Estimacion"]);
+                    int prio = Convert.ToInt32(dr["Prioridad"]);
+                    Proyecto oPro = DAOPro.buscarPorID(Convert.ToInt32(dr["IdProyecto"]));
+                    Sprint oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+                    DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
+                    DateTime Fin = Inic.AddMonths(1);
                     Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
                     lstHu.Add(hu);
                 }

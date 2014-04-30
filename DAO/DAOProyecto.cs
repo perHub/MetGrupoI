@@ -66,8 +66,9 @@ namespace DAO
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Proyectos where id=@ID");
-                query.Parameters.Add(new SqlParameter("@ID", System.Data.SqlDbType.Int));
+                SqlCommand query = new SqlCommand("select * from Proyectos where id=@ID", Conexion.cn);
+                query.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+                query.Parameters["@Id"].Value = ID;
                 SqlDataReader reader = query.ExecuteReader();
 
                 int id;
@@ -79,7 +80,9 @@ namespace DAO
                 {
                     id = reader.GetInt32(0);
                     nom = reader.GetString(1);
-                    oEmp = daoEmp.buscarPorID(reader.GetInt32(2));
+                    int nIDEmp = reader.GetInt32(2);
+                    Conexion.close();
+                    oEmp = daoEmp.buscarPorID(nIDEmp);
 
                     return new Proyecto(id,nom,oEmp);
                 }

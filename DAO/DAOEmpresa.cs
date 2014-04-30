@@ -80,8 +80,9 @@ namespace DAO
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Empresas where id=@ID");
+                SqlCommand query = new SqlCommand("select * from Empresas where id=@ID",Conexion.cn);
                 query.Parameters.Add(new SqlParameter("@ID",System.Data.SqlDbType.Int));
+                query.Parameters["@ID"].Value = ID;
                 SqlDataReader reader = query.ExecuteReader();
 
                 int id;
