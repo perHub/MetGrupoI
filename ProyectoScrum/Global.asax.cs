@@ -5,11 +5,14 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using Entidades;
+using Controladora;
 
 namespace ProyectoScrum
 {
     public class Global : System.Web.HttpApplication
     {
+        CProyecto conPro = new CProyecto();
+        CSprint conSpr = new CSprint();
 
         void Application_Start(object sender, EventArgs e)
         {
@@ -32,7 +35,8 @@ namespace ProyectoScrum
         void Session_Start(object sender, EventArgs e)
         {
             // Declaro las variables de sesión acá para listar las que vamos a utilizar.
-
+            Session["ProyectoActual"] = conPro.buscarPorId(0); //Hardcodeado.
+            Session["SprintActual"] = conSpr.buscarPorId(0); //Hardcodeado.
             Session["prodBacklog"] = new List<Historia>();
             Session["sprintBacklog"] = new List<Historia>();
 

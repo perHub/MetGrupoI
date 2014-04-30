@@ -63,8 +63,36 @@ namespace DAO
 
         public void modificar(int ID, Historia data)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Conexion.open();
+
+                string cmdtext = "update set Historias Descripcion=@desc, Estimacion=@est, Prioridad=@pri, IdProyecto=@idpro,"+
+                                            "IdSprint=@idspr, Inicio=@inicio, Fin=@fin where id=@id";
+
+                SqlCommand query = new SqlCommand(cmdtext, Conexion.cn);
+
+                query.Parameters.Add(new SqlParameter("@id", data.Id));
+                query.Parameters.Add(new SqlParameter("@Desc", data.Descripcion));
+                query.Parameters.Add(new SqlParameter("@est", data.Estimacion));
+                query.Parameters.Add(new SqlParameter("@pri", data.Prioridad));
+                query.Parameters.Add(new SqlParameter("@idpro", data.oProyecto.Id));
+                query.Parameters.Add(new SqlParameter("@idspr", data.oSprint.Id));
+                query.Parameters.Add(new SqlParameter("@inicio", data.Inicio.ToString()));
+                query.Parameters.Add(new SqlParameter("@fin", data.Fin.ToString()));
+
+                query.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            finally{
+                Conexion.close();
+            }
         }
+
 
         public Historia buscarPorID(int ID)
         {
@@ -77,7 +105,7 @@ namespace DAO
                 SqlDataReader reader = query.ExecuteReader();
 
                 DAOProyecto DAOPro = DAOProyecto.Instance();
-                DAOSprint DAOSpr = new DAOSprint();
+                DAOSprint DAOSpr = DAOSprint.Instance();
 
                 if (reader.Read())
                 {
@@ -113,7 +141,7 @@ namespace DAO
                 SqlDataReader reader = query.ExecuteReader();
 
                 DAOProyecto DAOPro = DAOProyecto.Instance();
-                DAOSprint DAOSpr = new DAOSprint();
+                DAOSprint DAOSpr = DAOSprint.Instance();
 
                 List<Historia> lstHu = new List<Historia>();
 
@@ -156,7 +184,7 @@ namespace DAO
                 SqlDataReader reader = query.ExecuteReader();
 
                 DAOProyecto DAOPro = DAOProyecto.Instance();
-                DAOSprint DAOSpr = new DAOSprint();
+                DAOSprint DAOSpr = DAOSprint.Instance();
 
                 List<Historia> lstHu = new List<Historia>();
 
@@ -199,7 +227,7 @@ namespace DAO
                 SqlDataReader reader = query.ExecuteReader();
 
                 DAOProyecto DAOPro = DAOProyecto.Instance();
-                DAOSprint DAOSpr = new DAOSprint();
+                DAOSprint DAOSpr = DAOSprint.Instance();
 
                 List<Historia> lstHu = new List<Historia>();
 

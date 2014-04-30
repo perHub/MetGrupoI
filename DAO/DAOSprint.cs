@@ -12,6 +12,7 @@ namespace DAO
         private static DAOSprint _instance;
         List<Sprint> listSprints = new List<Sprint>();
 
+        private DAOSprint() { }
         public static DAOSprint Instance()
         {
             // Uses lazy initialization.
@@ -106,11 +107,20 @@ namespace DAO
                     cmdAgregar.Parameters.Add("@inicio", System.Data.SqlDbType.DateTime);
                     cmdAgregar.Parameters.Add("@fin", System.Data.SqlDbType.DateTime);
                     cmdAgregar.Parameters.Add("@Nombre", System.Data.SqlDbType.VarChar);
+                    cmdAgregar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
                     //ahora los completo
                     cmdAgregar.Parameters["@inicio"].Value = sprint.Nombre;
                     cmdAgregar.Parameters["@fin"].Value = sprint.Fin;
                     cmdAgregar.Parameters["@Nombre"].Value = sprint.Nombre;
+                    cmdAgregar.Parameters["@Id"].Value = sprint.Id;
                     cmdAgregar.ExecuteNonQuery();
+
+                    //Agrego historias.
+
+
+                    SqlCommand agregarHistorias = new SqlCommand();
+
+
                     Conexion.close();
                 }
                 catch (Exception ex)
@@ -164,7 +174,7 @@ namespace DAO
                 }
             }
 
-
+            
             public void eliminar(Sprint data)
             {
                 throw new NotImplementedException();

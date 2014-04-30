@@ -13,6 +13,15 @@ namespace ProyectoScrum {
     public partial class gvHU {
         
         /// <summary>
+        /// Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Header;
+        
+        /// <summary>
         /// gvHU1 control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,14 @@ namespace ProyectoScrum {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvHU1;
+        
+        /// <summary>
+        /// Footer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder Footer;
     }
 }

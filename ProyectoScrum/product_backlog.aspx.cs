@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Entidades;
+using Controladora;
 
 namespace ProyectoScrum
 {
@@ -12,17 +13,41 @@ namespace ProyectoScrum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CHistoria CHU = new CHistoria();
+
             List<Historia> lstHU = (List<Historia>)Session["prodBacklog"];
 
-            lstHU.Clear();
+            /*lstHU.Clear();
+            
             DateTime test = new DateTime();
 
             for (int i = 0; i < 10; i++)
             {
                 Historia HU = new Historia(i, "Historia " + i, i * 5, 20 - i, null,null, test,test);
                 lstHU.Add(HU);
+            }*/
+
+            gvHU.LstHistu = CHU.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
+
+        }
+
+        protected void btnEnviar_Click(object sender, EventArgs e)
+        {
+            GridView gvAct = gvHU.gridActual;
+            List<int> lstids = new List<int>();
+
+            foreach (GridViewRow item in gvAct.Rows)
+            {
+                CheckBox Sel = (CheckBox) item.FindControl("chkSel");
+
+                if (Sel.Checked)
+                {
+                    Label lblid = (Label)item.FindControl("lblId");
+                    lstids.Add(Convert.ToInt32(lblid.Text));
+                }
             }
-            gvHU.LstHistu = lstHU;
+
+            //Llamar metodo controladora
         }
     }
 }

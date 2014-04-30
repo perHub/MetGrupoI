@@ -1,7 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="gvHU.master.cs" Inherits="ProyectoScrum.gvHU" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <asp:ContentPlaceHolder id="Header" runat="server">   </asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <asp:GridView ID="gvHU1" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" ForeColor="#333333" Height="195px" Width="527px" 
         BorderWidth="1px">
@@ -17,6 +19,21 @@
                 <asp:BoundField DataField="Prioridad" HeaderText="Prioridad" >
                 <ItemStyle Width="10px" />
                 </asp:BoundField>
+                <asp:TemplateField HeaderText="Sel">
+                    <EditItemTemplate>
+                        <asp:CheckBox ID="chkSel" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="CheckBox1" runat="server" 
+                            Enabled="false" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="Id" Visible="False" />
+                <asp:TemplateField HeaderText="idtest" Visible="False">
+                <ItemTemplate>
+                    <asp:Label ID="lblId" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Id")%>' ></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -28,5 +45,5 @@
             <SortedAscendingHeaderStyle BackColor="#6D95E1" />
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
-        </asp:GridView>
+        </asp:GridView><asp:ContentPlaceHolder ID="Footer" runat="server">   </asp:ContentPlaceHolder>
     </asp:Content>

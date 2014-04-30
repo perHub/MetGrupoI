@@ -7,10 +7,12 @@ using Entidades;
 
 namespace DAO
 {
-    class DAOProyecto : IDAO<Proyecto>
+    public class DAOProyecto : IDAO<Proyecto>
     {
         private static DAOProyecto _instance;
         List<Proyecto> listProyectos = new List<Proyecto>();
+
+        private DAOProyecto(){}
 
         public static DAOProyecto Instance()
         {

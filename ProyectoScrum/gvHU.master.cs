@@ -18,9 +18,12 @@ namespace ProyectoScrum
             set { lstHistu = value; }
         }
 
+        public static GridView gridActual;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             linkGrid();
+            gridActual = gvHU1;
         }
 
         public void linkGrid()

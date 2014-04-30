@@ -47,7 +47,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CHistoria.cs" />
+  </ItemGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Compile Include="CProyecto.cs" />
+    <Compile Include="CSprint.cs" />
     <Compile Include="CTarea.cs" />
   </ItemGroup>
   <ItemGroup>

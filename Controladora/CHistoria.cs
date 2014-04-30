@@ -7,9 +7,16 @@ using DAO;
 
 namespace Controladora
 {
-    class gestionHistorias
+   public class CHistoria
     {
         DAOHistoria dHu = DAOHistoria.Instance();
+
+       public void agregar(int id, string desc,decimal est, int prio,Proyecto oPro, Sprint oSpr,
+                            DateTime Inic, DateTime Fin){
+           Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+
+           dHu.agregar(hu);
+   }
 
         public List<Historia> historiasPorProyecto(int idproyecto)
         {
@@ -20,5 +27,6 @@ namespace Controladora
         {
             return dHu.historiasPorSrpint(idspr);
         }
+
     }
 }
