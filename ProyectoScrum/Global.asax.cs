@@ -35,8 +35,16 @@ namespace ProyectoScrum
         void Session_Start(object sender, EventArgs e)
         {
             // Declaro las variables de sesión acá para listar las que vamos a utilizar.
-            Session["ProyectoActual"] = conPro.buscarPorId(1); //Hardcodeado.
-            Session["SprintActual"] = conSpr.buscarPorId(1); //Hardcodeado.
+            try
+            {
+                Session["ProyectoActual"] = conPro.buscarPorId(1); //Hardcodeado.
+                Session["SprintActual"] = conSpr.buscarPorId(1); //Hardcodeado.
+            }
+            catch (Exception ex)
+            {
+                proyectos.Ex = ex;
+                Response.Redirect("/proyectos.aspx");
+            }
             Session["prodBacklog"] = new List<Historia>();
             Session["sprintBacklog"] = new List<Historia>();
 

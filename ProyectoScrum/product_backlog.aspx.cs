@@ -13,23 +13,20 @@ namespace ProyectoScrum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CHistoria CHU = new CHistoria();
-
-            List<Historia> lstHU = (List<Historia>)Session["prodBacklog"];
-
-            /*lstHU.Clear();
-            
-            DateTime test = new DateTime();
-
-            for (int i = 0; i < 10; i++)
+            try
             {
-                Historia HU = new Historia(i, "Historia " + i, i * 5, 20 - i, null,null, test,test);
-                lstHU.Add(HU);
-            }*/
+                CHistoria CHU = new CHistoria();
 
-            gvHU.LstHistu = CHU.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
+                List<Historia> lstHU = (List<Historia>)Session["prodBacklog"];
 
-            linkDropDown();
+                gvHU.LstHistu = CHU.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
+
+                linkDropDown();
+            }
+            catch (Exception ex)
+            {
+                alert.mostrarAlert(ex, this);
+            }
 
         }
 
@@ -39,25 +36,34 @@ namespace ProyectoScrum
             DDSprs.DataSource = null;
             DDSprs.DataSource = cSpr.sprintsPorProyecto((Proyecto)Session["ProyectoActual"]);
             DDSprs.DataBind();
+
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-            GridView gvAct = gvHU.gridActual;
-            List<int> lstids = new List<int>();
-
-            foreach (GridViewRow item in gvAct.Rows)
+            try
             {
-                CheckBox Sel = (CheckBox) item.FindControl("chkSel");
+                GridView gvAct = gvHU.gridActual;
+                List<int> lstids = new List<int>();
 
-                if (Sel.Checked)
+                foreach (GridViewRow item in gvAct.Rows)
                 {
-                    Label lblid = (Label)item.FindControl("lblId");
-                    lstids.Add(Convert.ToInt32(lblid.Text));
+                    CheckBox Sel = (CheckBox)item.FindControl("chkSel");
+
+                    if (Sel.Checked)
+                    {
+                        Label lblid = (Label)item.FindControl("lblId");
+                        lstids.Add(Convert.ToInt32(lblid.Text));
+                    }
                 }
+
+                //Llamar metodo controladora
             }
 
-            //Llamar metodo controladora
+            catch (Exception ex)
+            {
+                alert.mostrarAlert(ex, this);
+            }
         }
     }
 }
