@@ -29,6 +29,16 @@ namespace ProyectoScrum
 
             gvHU.LstHistu = CHU.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
 
+            linkDropDown();
+
+        }
+
+        private void linkDropDown()
+        {
+            CSprint cSpr = new CSprint();
+            DDSprs.DataSource = null;
+            DDSprs.DataSource = cSpr.sprintsPorProyecto((Proyecto)Session["ProyectoActual"]);
+            DDSprs.DataBind();
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)

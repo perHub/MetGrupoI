@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 using Entidades;
 
 namespace DAO
@@ -193,6 +194,50 @@ namespace DAO
             public List<Sprint> traerTodos()
             {
                 throw new NotImplementedException();
+            }
+
+            public List<Sprint> sprintsPorProyecto(Proyecto oPro)
+            {
+                try
+                {
+                    int idproyecto = oPro.Id;
+                    Conexion.open();
+
+                    SqlCommand query = new SqlCommand("select * from Sprints where IdProyecto=@id", Conexion.cn);
+                    query.Parameters.AddWithValue("@id", idproyecto);
+                    query.Parameters["@id"].Value = idproyecto; ;
+
+                    SqlDataReader reader = query.ExecuteReader();
+
+                    DAOProyecto DAOPro = DAOProyecto.Instance();
+
+                    List<Sprint> lstSpr = new List<Sprint>();
+
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+                    Conexion.close();
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        int id = Convert.ToInt32(dr["Id"]);
+                        String nombre = dr["Nombre"].ToString();
+                        DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
+                        DateTime Fin = Convert.ToDateTime(dr["Fin"]);
+                        
+                        Sprint oSpr = new Sprint(id, oPro, Inic, Fin,nombre, null); //AUn no creo la lista de historias por simplicidad.
+                        lstSpr.Add(oSpr);
+                    }
+
+                    return lstSpr;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    Conexion.close();
+                }
             }
     }
 

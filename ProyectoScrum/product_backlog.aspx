@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Footer" runat="server">
     <br />
 Enviar a sprint:
-<asp:DropDownList ID="DDSprs" runat="server">
+<asp:DropDownList ID="DDSprs" runat="server" DataValueField="Id" DataTextField="Nombre">
 </asp:DropDownList>
 &nbsp;
 <asp:Button ID="btnEnviar" runat="server" Text="Enviar al sprint" 

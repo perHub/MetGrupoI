@@ -9,7 +9,7 @@ namespace DAO
 {
     static public class Conexion
     {
-        static string ConnectionString = "Data Source=NICOLAS-PC\\SQL2005;Initial Catalog=PS;User ID=sa;Password=bobesponja";
+        static string ConnectionString = "Data Source=localhost;Initial Catalog=PS;Integrated Security=True";
         //static string ConnectionString = "Data Source=notebook\\SQLEXPRESS;Initial Catalog=ShareThis; Persist Security Info=true; Integrated Security=SSPI;";
 
         static public SqlConnection cn = new SqlConnection(ConnectionString);

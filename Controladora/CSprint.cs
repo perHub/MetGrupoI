@@ -21,9 +21,14 @@ namespace Controladora
 
         }
 
-        public void agregarHistoria(Sprint oSpr, Historia oHist)
+        public void agregarHistoria(Sprint oSpr, Historia oHist)//Terminar
         {
             oSpr.Historias.Add(oHist);
+        }
+
+        public List<Sprint> sprintsPorProyecto(Proyecto oPro)
+        {
+            return DSpr.sprintsPorProyecto(oPro);
         }
     }
 }
