@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Controladora;
 
 namespace ProyectoScrum
 {
@@ -11,6 +12,10 @@ namespace ProyectoScrum
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CTarea ctarea;
+            historiaDropDown.DataSource = null;
+            //historiaDropDown.DataSource = ctarea.lista
+            historiaDropDown.DataBind();
 
         }
 
@@ -20,5 +25,6 @@ namespace ProyectoScrum
 
             Response.Redirect("/sprint_actual.aspx");
         }
+
     }
 }

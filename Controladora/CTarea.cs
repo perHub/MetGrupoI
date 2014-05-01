@@ -12,9 +12,10 @@ namespace Controladora
     {
         DAOTarea dataTarea = DAOTarea.Instance();
 
-        public void agregar(String desc, String estado, decimal estima, DateTime ffin, DateTime fini, Historia hist, String obse, UsuarioSistema usu)
+        public void agregar(String desc,  decimal estima, DateTime ffin, DateTime fini, Historia hist, String obse, UsuarioSistema usu)
         {
-            Tarea auxTarea = new Tarea(desc, estado, estima, ffin, fini, hist, obse, usu);
+
+            Tarea auxTarea = new Tarea(desc, estima, ffin, fini, hist, obse, usu);
             dataTarea.agregar(auxTarea);
         }
 

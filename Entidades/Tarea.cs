@@ -9,7 +9,6 @@ namespace Entidades
     {
         int id;
         String descripcion;
-        String estado;
         decimal estimacion;
         DateTime fin;
         DateTime inicio;
@@ -37,11 +36,6 @@ namespace Entidades
             set { descripcion = value; }
         }
 
-        public String Estado
-        {
-            get { return estado; }
-            set { estado = value; }
-        }
 
         public decimal Estimacion
         {
@@ -81,10 +75,9 @@ namespace Entidades
         public Tarea(){
         }
 
-        public Tarea(int id, string descripcion, string estado, decimal estimacion,DateTime fin,DateTime inicio, Historia historia,string observaciones, UsuarioSistema owner) {
+        public Tarea(int id, string descripcion, decimal estimacion,DateTime fin,DateTime inicio, Historia historia,string observaciones, UsuarioSistema owner) {
             this.id = id;
             this.descripcion = descripcion;
-            this.estado = estado;
             this.estimacion = estimacion;
             this.fin = fin;
             this.inicio = inicio;
@@ -93,10 +86,9 @@ namespace Entidades
             this.owner=owner;
         }
 
-        public Tarea(string descripcion, string estado, decimal estimacion, DateTime fin, DateTime inicio, Historia historia, string observaciones, UsuarioSistema owner)
+        public Tarea(string descripcion,  decimal estimacion, DateTime fin, DateTime inicio, Historia historia, string observaciones, UsuarioSistema owner)
         {
             this.descripcion = descripcion;
-            this.estado = estado;
             this.estimacion = estimacion;
             this.fin = fin;
             this.inicio = inicio;

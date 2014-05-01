@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DAOestados.cs" />
     <Compile Include="DAOHistoria.cs" />
     <Compile Include="DAOEmpresa.cs" />
     <Compile Include="DAOProyecto.cs" />
