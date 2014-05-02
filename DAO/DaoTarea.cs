@@ -12,7 +12,8 @@ namespace DAO
     {
         private static DAOTarea _instance;
         DAOestados daoEstados = DAOestados.Instance();
-
+        DAOHistoria daoHistoria = DAOHistoria.Instance();
+        DAOUsuario_Sistema daoUsuarioSistema = DAOUsuario_Sistema.Instance();
         private DAOTarea()
         {
         }
@@ -203,15 +204,15 @@ namespace DAO
                 Conexion.close();
             }
         }
-        
-        
-       /* public List<Tarea> tareasByHistoria(int idHist)
+
+
+        public List<Tarea> tareasByHistoria(int idHist)
         {
             try
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Historias where IdHistoria=@id");
+                SqlCommand query = new SqlCommand("select * from Tareas where IdHistoria=@id");
                 query.Parameters.AddWithValue("@id", idHist);
 
                 SqlDataReader reader = query.ExecuteReader();
@@ -226,19 +227,18 @@ namespace DAO
                     int id = reader.GetInt32(0);
                     string descripcion = reader.GetString(1);
                     decimal estimacion = reader.GetDecimal(2);
-                    DateTime incio = reader.GetDateTime(3);
+                    DateTime inicio = reader.GetDateTime(3);
                     DateTime fin = reader.GetDateTime(4);
                     int idHistoria = reader.GetInt32(5);
                     int idUsuario_sistema = reader.GetInt32(6);
                     String observaciones = reader.GetString(7);
-
-                    
-
-                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
-                    lstHu.Add(hu);
+                    Historia historia = daoHistoria.buscarPorID(idHistoria);
+                    UsuarioSistema usuario = daoUsuarioSistema.buscarPorID(idUsuario_sistema);
+                    Tarea tarea = new Tarea(id, descripcion, estimacion, fin, inicio, historia, observaciones, usuario);
+                    lstTareas.Add(tarea);
                 }
 
-                return lstHu;
+                return lstTareas;
             }
             catch (Exception ex)
             {
@@ -248,7 +248,7 @@ namespace DAO
             {
                 Conexion.close();
             }
-        }*/
+        }
 
     }
 }
