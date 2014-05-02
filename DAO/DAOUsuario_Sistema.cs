@@ -73,6 +73,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        public UsuarioSistema buscarPorID(int id) {
+            throw new NotImplementedException();
+        }
 
 /*        public UsuarioSistema buscarPorID(int ID)
         {
