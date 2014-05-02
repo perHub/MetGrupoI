@@ -42,6 +42,7 @@
     <Compile Include="Empresa.cs" />
     <Compile Include="EstadoTarea.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="Habilidad-Usuario.cs" />
     <Compile Include="Habilidad.cs" />
     <Compile Include="Historia.cs" />
     <Compile Include="Invitado.cs" />
