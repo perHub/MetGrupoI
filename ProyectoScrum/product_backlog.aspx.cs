@@ -25,45 +25,64 @@ namespace ProyectoScrum
             }
             catch (Exception ex)
             {
-                alert.mostrarAlert(ex, this);
+                alert.mostrarExAlert(ex, this);
             }
 
         }
 
         private void linkDropDown()
         {
-            CSprint cSpr = new CSprint();
-            DDSprs.DataSource = null;
-            DDSprs.DataSource = cSpr.sprintsPorProyecto((Proyecto)Session["ProyectoActual"]);
-            DDSprs.DataBind();
+            if (!Page.IsPostBack)
+            {
+                CSprint cSpr = new CSprint();
+                DDSprs.DataSource = null;
+                DDSprs.DataSource = cSpr.sprintsPorProyecto((Proyecto)Session["ProyectoActual"]);
+                DDSprs.DataBind();
+            }
 
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                GridView gvAct = gvHU.gridActual;
-                List<int> lstids = new List<int>();
-
-                foreach (GridViewRow item in gvAct.Rows)
+                try
                 {
-                    CheckBox Sel = (CheckBox)item.FindControl("chkSel");
+                    CHistoria cHu = new CHistoria();
+                    CSprint cSpr = new CSprint();
 
-                    if (Sel.Checked)
+                    Sprint oSpr = cSpr.buscarPorId(Convert.ToInt32(DDSprs.SelectedValue));
+
+                    GridView gvAct = gvHU.gridActual;
+                    List<Historia> lstHu = new List<Historia>();
+
+                    foreach (GridViewRow item in gvAct.Rows)        //Obtengo HUs seleccionadas.
                     {
-                        Label lblid = (Label)item.FindControl("lblId");
-                        lstids.Add(Convert.ToInt32(lblid.Text));
+                        CheckBox Sel = (CheckBox)item.FindControl("chkSel");
+
+                        if (Sel.Checked)
+                        {
+                            Label lblid = (Label)item.FindControl("lblId");
+                            lstHu.Add(cHu.buscarPorId(Convert.ToInt32(lblid.Text)));
+                        }
                     }
+
+                    if (lstHu.Count > 0)
+                    {
+                        foreach (Historia oHu in lstHu) // Las asigno al sprint.
+                        {
+                            cHu.asignarSprint(oHu, oSpr);
+                        }
+
+                        alert.mostrarStringAlert("Historia asignada correctamente.", this);
+                    }
+                    else
+                        alert.mostrarStringAlert("Por favor seleccione una historia.", this);
+
                 }
 
-                //Llamar metodo controladora
-            }
-
-            catch (Exception ex)
-            {
-                alert.mostrarAlert(ex, this);
-            }
+                catch (Exception ex)
+                {
+                    alert.mostrarExAlert(ex, this);
+                }
         }
     }
 }

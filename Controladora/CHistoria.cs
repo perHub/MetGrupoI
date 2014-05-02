@@ -28,5 +28,24 @@ namespace Controladora
             return dHu.historiasPorSrpint(idspr);
         }
 
+        public Historia buscarPorId(int id)
+        {
+            return dHu.buscarPorID(id);
+        }
+        public void asignarSprint(Historia oHu, Sprint oSpr) // oSpr debe ser null para restaurarla a no asignada en caso de ser necesario.
+        {
+            if (oSpr != null)
+            {
+                oHu.oSprint = oSpr;
+               
+            }
+            else
+            {
+                oHu.oSprint = null;
+            }
+
+            dHu.modificar(oHu.Id, oHu);
+        }
+
     }
 }

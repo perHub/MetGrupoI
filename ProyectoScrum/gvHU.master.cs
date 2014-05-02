@@ -28,9 +28,12 @@ namespace ProyectoScrum
 
         public void linkGrid()
         {
-            gvHU1.DataSource = null;
-            gvHU1.DataSource = lstHistu;
-            gvHU1.DataBind();
+            if (!Page.IsPostBack)
+            {
+                gvHU1.DataSource = null;
+                gvHU1.DataSource = lstHistu;
+                gvHU1.DataBind();
+            }
         }
 
     }

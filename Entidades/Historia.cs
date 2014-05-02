@@ -62,8 +62,8 @@ namespace Entidades
 
         public Sprint oSprint
         {
-            get { return oSprint; }
-            set { oSprint = value; }
+            get { return osprint; }
+            set { osprint = value; }
         }
         public Historia() { 
         

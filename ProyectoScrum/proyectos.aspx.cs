@@ -13,7 +13,7 @@ namespace ProyectoScrum
         {
             if (ex != null) //Esto sólo lo hago para mostrar las excepciones que vienen de Global.asax, se podrá eliminar en el futuro.
             {
-                alert.mostrarAlert(ex, this);
+                alert.mostrarExAlert(ex, this);
             }
         }
         static Exception ex;
