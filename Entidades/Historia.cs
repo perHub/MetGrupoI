@@ -68,16 +68,22 @@ namespace Entidades
         public Historia() { 
         
         }
-        public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
-                            DateTime Inicio, DateTime Fin){
+        public Historia(int id, string descripcion, decimal estimacion, int prioridad, Proyecto proyecto, Sprint sprint,
+                            DateTime Inicio)
+        {
             this.id = id;
             //this.depende = depende;
-            this.descripcion=descripcion;
-            this.estimacion=estimacion;
+            this.descripcion = descripcion;
+            this.estimacion = estimacion;
             this.prioridad = prioridad;
             this.oproyecto = proyecto;
             this.osprint = sprint;
             this.inicio = Inicio;
+        }
+        public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
+                            DateTime Inicio, DateTime Fin): this(id, descripcion, estimacion, prioridad, proyecto, sprint,
+                            Inicio){
+
             this.fin = Fin;
         }
     }

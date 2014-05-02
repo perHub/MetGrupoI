@@ -117,9 +117,17 @@ namespace DAO
                     int nIdSpr = -1;
                     if (!reader.IsDBNull(5)) nIdSpr = reader.GetInt32(5);
                     DateTime Inic = reader.GetDateTime(6);
-                    DateTime Fin;
-                    if (!reader.IsDBNull(5)) Fin = reader.GetDateTime(7);
-                    else Fin = new DateTime(1990, 01, 01);
+                    DateTime Fin = new DateTime();
+
+                    Boolean existeFin;
+
+                    if (!reader.IsDBNull(7))
+                    {
+                        Fin = reader.GetDateTime(7);
+                        existeFin = true;
+                    }
+                    else
+                        existeFin = false;
 
                     Conexion.close();
 
@@ -132,7 +140,16 @@ namespace DAO
                         oSpr = null;
 
 
-                    return new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    Historia hu;
+
+                    if (existeFin)
+                    {
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    }
+                    else
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
+
+                    return hu;
                 }
                 else throw new Exception("Esa historia no existe.");
             }
@@ -145,7 +162,7 @@ namespace DAO
             }
         }
 
-        public List<Historia> traerTodos() 
+       /* public List<Historia> traerTodos() 
         {
             try
             {
@@ -188,7 +205,7 @@ namespace DAO
             {
                 Conexion.close();
             }
-        }
+        }*/
 
         public List<Historia> historiasPorProyecto(int idproyecto)
         {
@@ -219,15 +236,37 @@ namespace DAO
                     int prio = Convert.ToInt32(dr["Prioridad"]);
                     Proyecto oPro = DAOPro.buscarPorID(Convert.ToInt32(dr["IdProyecto"]));
                     DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
-                    DateTime Fin = Inic.AddMonths(1);
+                    DateTime Fin = new DateTime(); //Creo una instancia vacía para que el compilador no se queje.
+                    Boolean existeFin;
+
+                    if (dr["Fin"] is DBNull)
+                    {
+                        existeFin = false;
+                    }
+                    else
+                    {
+                        existeFin = true;
+                        Fin = Convert.ToDateTime(dr["Fin"]);
+                    }
+
+
                     Sprint oSpr;
 
                     if (dr["IdSprint"] is DBNull)
                         oSpr = null;
+                    else 
+                    oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
 
-                    else oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
 
-                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    Historia hu;
+
+                    if (existeFin)
+                    {
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    }
+                    else
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
+
                     lstHu.Add(hu);
                 }
 
@@ -249,8 +288,9 @@ namespace DAO
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Historias where IdProyecto=@id");
+                SqlCommand query = new SqlCommand("select * from Historias where IdSprint=@id", Conexion.cn);
                 query.Parameters.AddWithValue("@id", idsprint);
+                query.Parameters["@id"].Value = idsprint; ;
 
                 SqlDataReader reader = query.ExecuteReader();
 
@@ -259,18 +299,49 @@ namespace DAO
 
                 List<Historia> lstHu = new List<Historia>();
 
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32(0);
-                    String desc = reader.GetString(1);
-                    decimal est = reader.GetDecimal(2);
-                    int prio = reader.GetInt32(3);
-                    Proyecto oPro = DAOPro.buscarPorID(reader.GetInt32(4));
-                    Sprint oSpr = DAOSpr.buscarPorID(reader.GetInt32(5));
-                    DateTime Inic = reader.GetDateTime(6);
-                    DateTime Fin = reader.GetDateTime(7);
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                Conexion.close();
 
-                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["Id"]);
+                    String desc = Convert.ToString(dr["Descripcion"]);
+                    decimal est = Convert.ToDecimal(dr["Estimacion"]);
+                    int prio = Convert.ToInt32(dr["Prioridad"]);
+                    Proyecto oPro = DAOPro.buscarPorID(Convert.ToInt32(dr["IdProyecto"]));
+                    DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
+                    DateTime Fin = new DateTime(); //Creo una instancia vacía para que el compilador no se queje.
+                    Boolean existeFin;
+
+                    if (dr["Fin"] is DBNull)
+                    {
+                        existeFin = false;
+                    }
+                    else
+                    {
+                        existeFin = true;
+                        Fin = Convert.ToDateTime(dr["Fin"]);
+                    }
+
+
+                    Sprint oSpr;
+
+                    if (dr["IdSprint"] is DBNull)
+                        oSpr = null;
+                    else
+                        oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+
+
+                    Historia hu;
+
+                    if (existeFin)
+                    {
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    }
+                    else
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
+
                     lstHu.Add(hu);
                 }
 
@@ -326,7 +397,13 @@ namespace DAO
             {
                 Conexion.close();
             }*/
+
+
+        public List<Historia> traerTodos()
+        {
+            throw new NotImplementedException();
         }
+    }
        /* public List<Historia> traerDependencias()
         {
 
