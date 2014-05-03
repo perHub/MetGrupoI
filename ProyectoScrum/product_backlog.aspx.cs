@@ -71,7 +71,6 @@ namespace ProyectoScrum
                         {
                             cHu.asignarSprint(oHu, oSpr);
                         }
-
                         alert.mostrarStringAlert("Historia asignada correctamente.", this);
                     }
                     else

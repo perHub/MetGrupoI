@@ -15,6 +15,7 @@ namespace Entidades
         DateTime inicio;
         Proyecto oproyecto;
         Sprint osprint;
+        int numero;
 
         public DateTime Inicio
         {
@@ -65,26 +66,51 @@ namespace Entidades
             get { return osprint; }
             set { osprint = value; }
         }
+
+        public int Numero
+        {
+            get { return numero; }
+            set { numero = value; }
+        }
         public Historia() { 
         
         }
-        public Historia(int id, string descripcion, decimal estimacion, int prioridad, Proyecto proyecto, Sprint sprint,
-                            DateTime Inicio)
-        {
+        public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
+                            DateTime Inicio, DateTime Fin){
             this.id = id;
             //this.depende = depende;
-            this.descripcion = descripcion;
-            this.estimacion = estimacion;
+            this.descripcion=descripcion;
+            this.estimacion=estimacion;
             this.prioridad = prioridad;
             this.oproyecto = proyecto;
             this.osprint = sprint;
             this.inicio = Inicio;
-        }
-        public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
-                            DateTime Inicio, DateTime Fin): this(id, descripcion, estimacion, prioridad, proyecto, sprint,
-                            Inicio){
-
             this.fin = Fin;
         }
+
+        // sin fecha fin, para el product backlog
+        public Historia(int id, string descripcion, decimal estimacion, int prioridad, Proyecto proyecto, Sprint sprint,
+                    DateTime Inicio, int num)
+        {
+            this.Id = id;
+            this.Descripcion = descripcion;
+            this.Estimacion = estimacion;
+            this.Prioridad = prioridad;
+            this.oProyecto = proyecto;
+            this.oSprint = sprint;
+            this.Inicio = Inicio;
+            this.Numero = num;
+        }
+
+        // para el alta
+        public Historia(string descripcion, decimal estimacion, int prioridad, Proyecto proyecto, int Num)
+        {
+            this.Descripcion = descripcion;
+            this.Estimacion = estimacion;
+            this.Prioridad = prioridad;
+            this.oProyecto = proyecto;
+            this.Numero = Num;
+        }
+
     }
 }

@@ -235,17 +235,20 @@ namespace DAO
                     decimal est = Convert.ToDecimal(dr["Estimacion"]);
                     int prio = Convert.ToInt32(dr["Prioridad"]);
                     Proyecto oPro = DAOPro.buscarPorID(Convert.ToInt32(dr["IdProyecto"]));
-                    DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
-                    DateTime Fin = new DateTime(); //Creo una instancia vacía para que el compilador no se queje.
-                    Boolean existeFin;
-
+                    Sprint oSpr = new Sprint();
+                    if (dr["IdSprint"] != DBNull.Value)
                     if (dr["Fin"] is DBNull)
                     {
-                        existeFin = false;
+                        oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
                     }
+                    DateTime? Inic ;
+                    if (dr["Inicio"] != DBNull.Value)
+                        Inic = Convert.ToDateTime(dr["Inicio"]);
                     else
-                    {
-                        existeFin = true;
+                        Inic = null;
+
+                    DateTime? Fin ;
+                    if (dr["Fin"] != DBNull.Value)
                         Fin = Convert.ToDateTime(dr["Fin"]);
                     }
 
@@ -254,8 +257,8 @@ namespace DAO
 
                     if (dr["IdSprint"] is DBNull)
                         oSpr = null;
-                    else 
-                    oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+                    else
+                        Fin = null;
 
 
                     Historia hu;
@@ -267,6 +270,7 @@ namespace DAO
                     else
                         hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
 
+                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Convert.ToDateTime(Inic), Convert.ToDateTime(Fin));
                     lstHu.Add(hu);
                 }
 

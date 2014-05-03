@@ -7,6 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Footer" runat="server">
     <br />
 Enviar a sprint:
+<asp:Button ID="btnNuevaHistoria" runat="server" Text="Crear Historia de Usuario" 
+    onclick="btnCrearHistoria_Click" Width="200px" />
 <asp:DropDownList ID="DDSprs" runat="server" DataValueField="Id" DataTextField="Nombre">
 </asp:DropDownList>
 &nbsp;
