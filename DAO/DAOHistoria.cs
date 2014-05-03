@@ -361,6 +361,7 @@ namespace DAO
                 DAOProyecto DAOPro = DAOProyecto.Instance();
                 DAOSprint DAOSpr = DAOSprint.Instance();
 
+
                 if (reader.Read())
                 {
                     int id = reader.GetInt32(0);
@@ -368,14 +369,40 @@ namespace DAO
                     decimal est = reader.GetDecimal(2);
                     int prio = reader.GetInt32(3);
                     int nIdProy = reader.GetInt32(4);
-                    Conexion.close();
-                    Proyecto oPro = DAOPro.buscarPorID(nIdProy);
-                    int nIdSpr = reader.GetInt32(5);
-                    Sprint oSpr = DAOSpr.buscarPorID(nIdSpr);
-                    DateTime Inic = reader.GetDateTime(6);
-                    DateTime Fin = reader.GetDateTime(7);
+                    int nIdSpr = -1;
+                    Boolean tieneSprint = !reader.IsDBNull(5);
+                    DateTime Inic = new DateTime();
+                    DateTime Fin = new DateTime();
+                    int num = reader.GetInt32(8);
 
-                    return new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    Boolean existeInicio = !reader.IsDBNull(6);
+                    Boolean existeFin = !reader.IsDBNull(7);
+
+                    if (tieneSprint)
+                        nIdSpr = reader.GetInt32(5);
+                    if (existeInicio)
+                        Inic = reader.GetDateTime(6);
+                    if (existeFin)
+                        Fin = reader.GetDateTime(7);
+
+
+                    Conexion.close();
+
+                    Proyecto oPro = DAOPro.buscarPorID(nIdProy);
+
+                    Historia hu = new Historia(id, desc, est, prio, oPro, num);
+
+                    if (tieneSprint)
+                        hu.oSprint = DAOSpr.buscarPorID(nIdSpr);
+
+                    if (existeInicio)
+                        hu.Inicio = Inic;
+
+                    if (existeFin)
+                        hu.Fin = Fin;
+
+
+                    return hu;
                 }
                 else throw new Exception("Esa historia no existe.");
             }
@@ -387,6 +414,7 @@ namespace DAO
             {
                 Conexion.close();
             }
+
         
         }
 

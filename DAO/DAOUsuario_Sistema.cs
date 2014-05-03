@@ -73,11 +73,8 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
-        public UsuarioSistema buscarPorID(int id) {
-            throw new NotImplementedException();
-        }
 
-/*        public UsuarioSistema buscarPorID(int ID)
+        public UsuarioSistema buscarPorID(int ID)
         {
             try
             {
@@ -118,8 +115,9 @@ namespace DAO
                     scrumMaster = reader1.GetBoolean(2);
                     idProyecto = reader1.GetInt32(3);
                     Conexion.close();
+                    return new Desarrollador();
                 }
-                return 
+
                 
                 else throw new Exception("Ese proyecto no existe.");
 
@@ -133,7 +131,7 @@ namespace DAO
                 Conexion.close();
             }
 
-        }*/
+        }
 
         public List<UsuarioSistema> traerTodos()
         {

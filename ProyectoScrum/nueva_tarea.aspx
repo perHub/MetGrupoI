@@ -9,11 +9,11 @@
         <asp:DropDownList ID="historiaDropDown" runat="server" >
         </asp:DropDownList>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
-        <asp:Label ID="error" runat="server" Text="Label" Visible="False"></asp:Label>
     </p>
     <p>
         Nombre:
         <asp:TextBox ID="txtNom" runat="server" Width="94px"></asp:TextBox>
+        <asp:Label ID="error" runat="server" Text="Label"></asp:Label>
     </p>
     <asp:Label ID="lb" runat="server" Text="Estimacion"></asp:Label>
         <asp:TextBox ID="EstimacionTXT" runat="server" Width="90px"></asp:TextBox>

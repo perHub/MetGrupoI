@@ -21,10 +21,12 @@ namespace ProyectoScrum
                 historiaDropDown.DataSource = null;
                 historiaDropDown.DataSource = chistoria.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
                 historiaDropDown.DataBind();
+                error.Visible = true;
+                error.Text = "el proyecto corriendo es :" + ((Proyecto)Session["ProyectoActual"]).Id.ToString();
 
             }
-            catch (Exception ex) { 
-            
+            catch (Exception ex) {
+                error.Text = "excepcion";
             }
 
         }

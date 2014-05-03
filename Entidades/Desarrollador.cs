@@ -15,5 +15,8 @@ namespace Entidades
             this.Password = password;
             this.ListaHabilidades = listaHabilidades;
         }
+        public Desarrollador()
+        {
+        }
     }
 }
