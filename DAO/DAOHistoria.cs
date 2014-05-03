@@ -349,6 +349,46 @@ namespace DAO
                 Conexion.close();
             }
         }
+        public Historia historiaBYString(String descrip) {
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select * from historias where descripcion=@descripcion");
+                query.Parameters.Add(new SqlParameter("@descripcion", System.Data.SqlDbType.VarChar));
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = DAOSprint.Instance();
+
+                if (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    String desc = reader.GetString(1);
+                    decimal est = reader.GetDecimal(2);
+                    int prio = reader.GetInt32(3);
+                    int nIdProy = reader.GetInt32(4);
+                    Conexion.close();
+                    Proyecto oPro = DAOPro.buscarPorID(nIdProy);
+                    int nIdSpr = reader.GetInt32(5);
+                    Sprint oSpr = DAOSpr.buscarPorID(nIdSpr);
+                    DateTime Inic = reader.GetDateTime(6);
+                    DateTime Fin = reader.GetDateTime(7);
+
+                    return new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                }
+                else throw new Exception("Esa historia no existe.");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        
+        }
 
         /*public List<Historia> retornarHistoriasQuery(String Sqlquery)
         {

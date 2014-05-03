@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CHistoria.cs" />
+    <Compile Include="CUsuario_sistema.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

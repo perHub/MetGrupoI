@@ -58,13 +58,13 @@ namespace ProyectoScrum {
         protected global::System.Web.UI.WebControls.TextBox txtNom;
         
         /// <summary>
-        /// Label1 control.
+        /// lb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lb;
         
         /// <summary>
         /// EstimacionTXT control.
@@ -76,40 +76,40 @@ namespace ProyectoScrum {
         protected global::System.Web.UI.WebControls.TextBox EstimacionTXT;
         
         /// <summary>
-        /// Label2 control.
+        /// lbInicio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lbInicio;
         
         /// <summary>
-        /// finicioTXT control.
+        /// Calendar1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox finicioTXT;
+        protected global::System.Web.UI.WebControls.Calendar Calendar1;
         
         /// <summary>
-        /// Label3 control.
+        /// lbFin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label lbFin;
         
         /// <summary>
-        /// ffinTXT control.
+        /// Calendar2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ffinTXT;
+        protected global::System.Web.UI.WebControls.Calendar Calendar2;
         
         /// <summary>
         /// txtDesc control.
@@ -119,15 +119,6 @@ namespace ProyectoScrum {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDesc;
-        
-        /// <summary>
-        /// dropdEst control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropdEst;
         
         /// <summary>
         /// btnCrear control.

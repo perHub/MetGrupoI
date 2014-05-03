@@ -34,6 +34,9 @@ namespace Controladora
         {
             return dHu.historiasPorSrpint(idspr);
         }
+        public Historia historiaBYDescripcion(String descripcion) {
+            return dHu.historiaBYString(descripcion);
+        }
 
         public Historia buscarPorId(int id)
         {

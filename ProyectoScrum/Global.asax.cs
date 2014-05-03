@@ -13,6 +13,8 @@ namespace ProyectoScrum
     {
         CProyecto conPro = new CProyecto();
         CSprint conSpr = new CSprint();
+        CUsuario_sistema conUsuSis = new CUsuario_sistema();
+        
 
         void Application_Start(object sender, EventArgs e)
         {
@@ -39,6 +41,7 @@ namespace ProyectoScrum
             {
                 Session["ProyectoActual"] = conPro.buscarPorId(1); //Hardcodeado.
                 Session["SprintActual"] = conSpr.buscarPorId(1); //Hardcodeado.
+                Session["UsuarioSistema"] = conUsuSis.buscarByID(5);
             }
             catch (Exception ex)
             {
