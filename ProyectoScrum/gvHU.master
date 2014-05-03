@@ -2,8 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <asp:ContentPlaceHolder id="Header" runat="server">   </asp:ContentPlaceHolder>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:ContentPlaceHolder id="CPHU" runat="server">   </asp:ContentPlaceHolder>
     <asp:GridView ID="gvHU1" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" ForeColor="#333333" Height="195px" Width="527px" 
         BorderWidth="1px">

@@ -12,11 +12,18 @@ namespace Controladora
         DAOHistoria dHu = DAOHistoria.Instance();
 
        public void agregar(int id, string desc,decimal est, int prio,Proyecto oPro, Sprint oSpr,
-                            DateTime Inic, DateTime Fin){
-           Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                            DateTime Inic, DateTime Fin, int num){
+           Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin, num);
 
            dHu.agregar(hu);
    }
+
+       public void agregar(string desc, decimal est, int prio, Proyecto oPro, int Num)
+       {
+           Historia hu = new Historia(desc, est, prio, oPro, Num);
+
+           dHu.agregar(hu);
+       }
 
         public List<Historia> historiasPorProyecto(int idproyecto)
         {

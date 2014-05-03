@@ -32,7 +32,7 @@ namespace DAO
             {
                 Conexion.open();
 
-                string cmdtext = "insert into Historias(Descripcion, Estimacion, Prioridad, IdProyecto, Numero) values (@desc, @est, @pri, @idpro, @num)";
+                string cmdtext = "insert into Historias(Descripcion, Estimacion, Prioridad, IdProyecto, IdSprint, Inicio, Fin) values (@desc, @est, @pri, @idpro, @idspr, @inicio, @fin)";
 
                 SqlCommand query = new SqlCommand(cmdtext, Conexion.cn);
 
@@ -41,13 +41,9 @@ namespace DAO
                 query.Parameters.Add(new SqlParameter("@est", data.Estimacion));
                 query.Parameters.Add(new SqlParameter("@pri", data.Prioridad));
                 query.Parameters.Add(new SqlParameter("@idpro", data.oProyecto.Id));
-                query.Parameters.Add(new SqlParameter("@num", data.Numero));
-
-                query.Parameters["@desc"].Value = data.Descripcion;
-                query.Parameters["@est"].Value = data.Estimacion;
-                query.Parameters["@pri"].Value = data.Prioridad;
-                query.Parameters["@idpro"].Value = data.oProyecto.Id;
-                query.Parameters["@num"].Value = data.Numero;
+                query.Parameters.Add(new SqlParameter("@idspr", data.oSprint.Id));
+                query.Parameters.Add(new SqlParameter("@inicio", data.Inicio.ToString()));
+                query.Parameters.Add(new SqlParameter("@fin", data.Fin.ToString()));
 
                 query.ExecuteNonQuery();
             }
@@ -71,20 +67,8 @@ namespace DAO
             {
                 Conexion.open();
 
-                Boolean tieneSprint = data.oSprint != null;
-                Boolean tieneInicio = data.Inicio != Convert.ToDateTime(null);
-                Boolean tieneFin = data.Fin != Convert.ToDateTime(null);
-
-                string qparams= "update Historias set Descripcion=@desc, Estimacion=@est, Prioridad=@pri, IdProyecto=@idpro,"+
-                                             "Numero=@Num";
-                if (tieneSprint)
-                    qparams += ",IdSprint=@idspr";
-                if (tieneInicio)
-                    qparams += ",Inicio=@inicio";
-                if (tieneFin)
-                    qparams += ",Fin=@fin";
-
-                string cmdtext = qparams + " where id=@id";
+                string cmdtext = "update Historias set Descripcion=@desc, Estimacion=@est, Prioridad=@pri, IdProyecto=@idpro,"+
+                                            "IdSprint=@idspr, Inicio=@inicio, Fin=@fin where id=@id";
 
                 SqlCommand query = new SqlCommand(cmdtext, Conexion.cn);
 
@@ -93,14 +77,9 @@ namespace DAO
                 query.Parameters.Add(new SqlParameter("@est", data.Estimacion));
                 query.Parameters.Add(new SqlParameter("@pri", data.Prioridad));
                 query.Parameters.Add(new SqlParameter("@idpro", data.oProyecto.Id));
-                query.Parameters.Add(new SqlParameter("@Num", data.Numero));
-
-                if(tieneSprint)
-                    query.Parameters.Add(new SqlParameter("@idspr", data.oSprint.Id));
-                if(tieneInicio)
-                    query.Parameters.Add(new SqlParameter("@inicio", data.Inicio.ToString("yyyy/MM/dd")));
-                if(tieneFin)
-                    query.Parameters.Add(new SqlParameter("@fin", data.Fin.ToString("yyyy/MM/dd")));
+                query.Parameters.Add(new SqlParameter("@idspr", data.oSprint.Id));
+                query.Parameters.Add(new SqlParameter("@inicio", data.Inicio.ToString("yyyy/MM/dd")));
+                query.Parameters.Add(new SqlParameter("@fin", data.Fin.ToString("yyyy/MM/dd")));
 
                 query.ExecuteNonQuery();
             }
@@ -136,37 +115,39 @@ namespace DAO
                     int prio = reader.GetInt32(3);
                     int nIdProy = reader.GetInt32(4);
                     int nIdSpr = -1;
-                    Boolean tieneSprint = !reader.IsDBNull(5);
-                    DateTime Inic = new DateTime();
+                    if (!reader.IsDBNull(5)) nIdSpr = reader.GetInt32(5);
+                    DateTime Inic = reader.GetDateTime(6);
                     DateTime Fin = new DateTime();
-                    int num = reader.GetInt32(8);
 
-                    Boolean existeInicio = !reader.IsDBNull(6);
-                    Boolean existeFin = !reader.IsDBNull(7);
+                    Boolean existeFin;
 
-                    if (tieneSprint)
-                        nIdSpr = reader.GetInt32(5);
-                    if(existeInicio)
-                        Inic = reader.GetDateTime(6);
-                    if (existeFin)
+                    if (!reader.IsDBNull(7))
+                    {
                         Fin = reader.GetDateTime(7);
-
+                        existeFin = true;
+                    }
+                    else
+                        existeFin = false;
 
                     Conexion.close();
 
+                    Sprint oSpr;
                     Proyecto oPro = DAOPro.buscarPorID(nIdProy);
 
-                    Historia hu = new Historia(id, desc, est, prio, oPro, num);
+                    if (nIdSpr != -1)
+                        oSpr = DAOSpr.buscarPorID(nIdSpr);
+                    else
+                        oSpr = null;
 
-                    if (tieneSprint)
-                        hu.oSprint = DAOSpr.buscarPorID(nIdSpr);
 
-                    if (existeInicio)
-                        hu.Inicio = Inic;
+                    Historia hu;
 
                     if (existeFin)
-                        hu.Fin = Fin;
-
+                    {
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    }
+                    else
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
 
                     return hu;
                 }
@@ -232,7 +213,7 @@ namespace DAO
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Historias where Idproyecto=@id", Conexion.cn);
+                SqlCommand query = new SqlCommand("select * from Historias where IdProyecto=@id", Conexion.cn);
                 query.Parameters.AddWithValue("@id", idproyecto);
                 query.Parameters["@id"].Value = idproyecto; ;
 
@@ -254,25 +235,45 @@ namespace DAO
                     decimal est = Convert.ToDecimal(dr["Estimacion"]);
                     int prio = Convert.ToInt32(dr["Prioridad"]);
                     Proyecto oPro = DAOPro.buscarPorID(Convert.ToInt32(dr["IdProyecto"]));
-                    int num = Convert.ToInt32(dr["Numero"]);
+<<<<<<< HEAD
+                    DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
+                    DateTime Fin = new DateTime(); //Creo una instancia vacía para que el compilador no se queje.
+                    Boolean existeFin;
 
-                    //Guardo las comprobaciones.
-                    Boolean tieneSprint = dr["IdSprint"] != DBNull.Value;
-                    Boolean existeInicio = dr["Inicio"] != DBNull.Value;
-                    Boolean existeFin = dr["Fin"] != DBNull.Value;
+                    if (dr["Fin"] is DBNull)
+                    {
+                        existeFin = false;
+                    }
+                    else
+                    {
+                        existeFin = true;
+                        Fin = Convert.ToDateTime(dr["Fin"]);
+                    }
 
-                    Historia hu = new Historia(id, desc, est, prio, oPro, num);
 
-                    if (tieneSprint)
-                        hu.oSprint = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+                    Sprint oSpr;
 
-                    if (existeInicio)
-                        hu.Inicio = Convert.ToDateTime(dr["Inicio"]);
+                    if (dr["IdSprint"] is DBNull)
+                        oSpr = null;
+                    else 
+                    oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+
+
+                    Historia hu;
 
                     if (existeFin)
-                        hu.Fin = Convert.ToDateTime(dr["Fin"]);
+                    {
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    }
+                    else
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
 
-
+=======
+                    Sprint oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+                    DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
+                    DateTime Fin = Inic.AddMonths(1);
+                    Historia hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+>>>>>>> parent of c830551... Alta de Historias
                     lstHu.Add(hu);
                 }
 
@@ -316,24 +317,37 @@ namespace DAO
                     decimal est = Convert.ToDecimal(dr["Estimacion"]);
                     int prio = Convert.ToInt32(dr["Prioridad"]);
                     Proyecto oPro = DAOPro.buscarPorID(Convert.ToInt32(dr["IdProyecto"]));
-                    int num = Convert.ToInt32(dr["Numero"]);
+                    DateTime Inic = Convert.ToDateTime(dr["Inicio"]);
+                    DateTime Fin = new DateTime(); //Creo una instancia vacía para que el compilador no se queje.
+                    Boolean existeFin;
 
-                    //Guardo las comprobaciones.
-                    Boolean tieneSprint = dr["IdSprint"] != DBNull.Value;
-                    Boolean existeInicio = dr["Inicio"] != DBNull.Value;
-                    Boolean existeFin = dr["Fin"] != DBNull.Value;
+                    if (dr["Fin"] is DBNull)
+                    {
+                        existeFin = false;
+                    }
+                    else
+                    {
+                        existeFin = true;
+                        Fin = Convert.ToDateTime(dr["Fin"]);
+                    }
 
-                    Historia hu = new Historia(id, desc, est, prio, oPro, num);
 
-                    if (tieneSprint)
-                        hu.oSprint = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+                    Sprint oSpr;
 
-                    if (existeInicio)
-                        hu.Inicio = Convert.ToDateTime(dr["Inicio"]);
+                    if (dr["IdSprint"] is DBNull)
+                        oSpr = null;
+                    else
+                        oSpr = DAOSpr.buscarPorID(Convert.ToInt32(dr["IdSprint"]));
+
+
+                    Historia hu;
 
                     if (existeFin)
-                        hu.Fin = Convert.ToDateTime(dr["Fin"]);
-
+                    {
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic, Fin);
+                    }
+                    else
+                        hu = new Historia(id, desc, est, prio, oPro, oSpr, Inic);
 
                     lstHu.Add(hu);
                 }

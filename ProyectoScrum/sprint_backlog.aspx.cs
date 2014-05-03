@@ -13,7 +13,7 @@ namespace ProyectoScrum
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            List<Historia> lstHU = (List<Historia>)Session["sprintBacklog"];
+            /*List<Historia> lstHU = (List<Historia>)Session["sprintBacklog"];
             lstHU.Clear();
             DateTime test = new DateTime();
 
@@ -22,7 +22,7 @@ namespace ProyectoScrum
                 Historia HU = new Historia(i, "Historia " + i, i * 5, 20 - i, null,null,  test, test);
                 lstHU.Add(HU);
             }
-            gvHU.LstHistu = lstHU;
+            gvHU.LstHistu = lstHU;*/
         }
     }
 }
