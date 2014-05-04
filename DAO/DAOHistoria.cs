@@ -245,6 +245,7 @@ namespace DAO
 
                 DataTable dt = new DataTable();
                 dt.Load(reader);
+                reader.Close();
                 Conexion.close();
 
                 foreach (DataRow dr in dt.Rows)

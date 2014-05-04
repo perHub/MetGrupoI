@@ -235,6 +235,7 @@ namespace DAO
                     Tarea tarea = new Tarea(id, descripcion, estimacion, fin, inicio, historia, observaciones, usuario);
                     lstTareas.Add(tarea);
                 }
+                reader.Close();
 
                 return lstTareas;
             }
@@ -250,6 +251,7 @@ namespace DAO
         public List<Tarea> buscarTareaPorProyecto(int idProyecto) {
             try
             {
+                Conexion.close();
                 List<Historia> historias = daoHistoria.historiasPorProyecto(idProyecto);
                 List<Tarea> lsttareas = new List<Tarea>();
                 foreach (Historia his in historias)
@@ -258,8 +260,12 @@ namespace DAO
                 } return lsttareas;
 
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 throw ex;
+            }
+            finally {
+                Conexion.close();
             }
 
         }
