@@ -26,8 +26,13 @@ namespace ProyectoScrum
             gvTareas.DataSource = a;
             gvTareas.DataBind();*/
 
-            gvTareas.DataSource = ctarea.buscarPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
+            gvTareas.DataSource = ctarea.buscarPorSprint(((Sprint)Session["SprintActual"]).Id);
             gvTareas.DataBind();
+        }
+
+        protected void gvTareas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

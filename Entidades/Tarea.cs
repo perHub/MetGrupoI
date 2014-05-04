@@ -15,7 +15,24 @@ namespace Entidades
         Historia historia;
         string observaciones;
         UsuarioSistema owner;
+        string estado;
+
+        public string Estado
+        {
+            get { return estado; }
+            set { estado = value; }
+        }
+
         List<EstadoTarea> listaDeEstados;
+
+        public Tarea(int id, string descr, decimal estima,Historia h, String observ, string estado){
+            this.id = id;
+            this.descripcion = descr;
+            this.estimacion = estima;
+            this.historia = h;
+            this.observaciones = observ;
+            this.Estado = estado;
+        }
 
         public List<EstadoTarea> ListaDeEstados
         {

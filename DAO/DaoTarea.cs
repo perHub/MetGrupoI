@@ -204,7 +204,7 @@ namespace DAO
         }
 
 
-       public List<Tarea> tareasByHistoria(int idHist)
+/*       public List<Tarea> tareasByHistoria(int idHist)
         {
             try
             {
@@ -212,32 +212,49 @@ namespace DAO
 
                 SqlCommand query = new SqlCommand("select * from Tareas where IdHistoria=@id", Conexion.cn);
                 query.Parameters.AddWithValue("@id", idHist);
+                query.Parameters["@id"].Value = idHist; ;
 
                 SqlDataReader reader = query.ExecuteReader();
 
-                DAOTarea DAOt = DAOTarea.Instance();
-                DAOUsuario_Sistema DAOus = DAOUsuario_Sistema.Instance();
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = DAOSprint.Instance();
 
-                List<Tarea> lstTareas = new List<Tarea>();
+                List<Tarea> lstTarea = new List<Tarea>();
 
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32(0);
-                    string descripcion = reader.GetString(1);
-                    decimal estimacion = reader.GetDecimal(2);
-                    DateTime inicio = reader.GetDateTime(3);
-                    DateTime fin = reader.GetDateTime(4);
-                    int idHistoria = reader.GetInt32(5);
-                    int idUsuario_sistema = reader.GetInt32(6);
-                    String observaciones = reader.GetString(7);
-                    Historia historia = daoHistoria.buscarPorID(idHistoria);
-                    UsuarioSistema usuario = daoUsuarioSistema.buscarPorID(idUsuario_sistema);
-                    Tarea tarea = new Tarea(id, descripcion, estimacion, fin, inicio, historia, observaciones, usuario);
-                    lstTareas.Add(tarea);
-                }
+                DataTable dt = new DataTable();
+                dt.Load(reader);
                 reader.Close();
+                Conexion.close();
 
-                return lstTareas;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["Id"]);
+                    String desc = Convert.ToString(dr["Descripcion"]);
+                    decimal est = Convert.ToDecimal(dr["Estimacion"]);
+                    int idHistoria = Convert.ToInt32(dr["idHistoria"]);
+                    string observaciones=Convert.ToString(dr["observaciones"]);
+
+                    //Guardo las comprobaciones.
+                    Boolean tieneInicio = dr["Inicio"] != DBNull.Value;
+                    Boolean tieneFin = dr["Fin"] != DBNull.Value;
+                    Boolean tieneusu = dr["idUsuario_Sistema"] != DBNull.Value;
+                    Historia historia = daoHistoria.buscarPorID(idHist);
+                    Tarea tarea = new Tarea(id, desc, est, historia, observaciones);
+
+                    if (tieneInicio)
+                        tarea.Incio = Convert.ToDateTime(dr["inicio"]);
+
+                    if (tieneFin)
+                        tarea.Fin = Convert.ToDateTime(dr["Fin"]);
+
+                    if (tieneusu)
+                        tarea.Owner = daoUsuarioSistema.buscarPorID(Convert.ToInt32(dr["idUsuario_Sistema"]));
+
+
+                    lstTarea.Add(tarea);
+                }
+
+                return lstTarea;
             }
             catch (Exception ex)
             {
@@ -247,11 +264,11 @@ namespace DAO
             {
                 Conexion.close();
             }
-        }
-        public List<Tarea> buscarTareaPorProyecto(int idProyecto) {
+        }*/
+       
+        /*public List<Tarea> buscarTareaPorProyecto(int idProyecto) {
             try
             {
-                Conexion.close();
                 List<Historia> historias = daoHistoria.historiasPorProyecto(idProyecto);
                 List<Tarea> lsttareas = new List<Tarea>();
                 foreach (Historia his in historias)
@@ -268,7 +285,81 @@ namespace DAO
                 Conexion.close();
             }
 
+        }*/
+        public List<Tarea> tareasByHistoria(int idHist)
+        {
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select t.Id, t.Descripcion,t.Estimacion,t.Inicio,t.Fin,t.IdHistoria,t.IdUsuario_Sistema,t.Observaciones, e.Nombre,MAX(et.Feha) from Tareas t inner join Estados_Tareas et on t.Id=et.IdTarea inner join Estados e on e.Id=et.IdEstadoActual group by t.id,Descripcion, nombre,Feha,Estimacion,inicio,fin,IdHistoria,IdUsuario_Sistema,t.Observaciones;", Conexion.cn);
+                query.Parameters.AddWithValue("@id", idHist);
+                query.Parameters["@id"].Value = idHist; ;
+
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = DAOSprint.Instance();
+
+                List<Tarea> lstTarea = new List<Tarea>();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                reader.Close();
+                Conexion.close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["Id"]);
+                    String desc = Convert.ToString(dr["Descripcion"]);
+                    decimal est = Convert.ToDecimal(dr["Estimacion"]);
+                    int idHistoria = Convert.ToInt32(dr["idHistoria"]);
+                    string observaciones=Convert.ToString(dr["observaciones"]);
+                    String estado = Convert.ToString(dr["nombre"]);
+
+                    //Guardo las comprobaciones.
+                    Boolean tieneInicio = dr["Inicio"] != DBNull.Value;
+                    Boolean tieneFin = dr["Fin"] != DBNull.Value;
+                    Boolean tieneusu = dr["idUsuario_Sistema"] != DBNull.Value;
+                    Historia historia = daoHistoria.buscarPorID(idHist);
+                    Tarea tarea = new Tarea(id, desc, est, historia, observaciones,estado);
+
+                    if (tieneInicio)
+                        tarea.Incio = Convert.ToDateTime(dr["inicio"]);
+
+                    if (tieneFin)
+                        tarea.Fin = Convert.ToDateTime(dr["Fin"]);
+
+                    if (tieneusu)
+                        tarea.Owner = daoUsuarioSistema.buscarPorID(Convert.ToInt32(dr["idUsuario_Sistema"]));
+
+
+                    lstTarea.Add(tarea);
+                }
+
+                return lstTarea;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
         }
+
+       public List<Tarea> historiasporSprint(int idsprint) {
+
+           List<Historia> lsthistoria = new List<Historia>();
+           List<Tarea> lstarea=new List<Tarea>();
+           lsthistoria=daoHistoria.historiasPorSrpint(idsprint);
+           foreach (Historia h in lsthistoria) {
+               lstarea.AddRange(this.tareasByHistoria(h.Id));
+           } return lstarea;
+       }
+
+        
 
     }
 }
