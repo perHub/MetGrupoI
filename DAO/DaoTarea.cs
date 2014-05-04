@@ -91,9 +91,8 @@ namespace DAO
             try
             {
                 Conexion.open();
-                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Id,Descripcion,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones) VALUES (@Id,@Descripcion,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones)", Conexion.cn);
+                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Descripcion,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones) VALUES (@Descripcion,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones)", Conexion.cn);
                 //paso parametros
-                cmdAgregar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar);
                 cmdAgregar.Parameters.Add("@Estimacion", System.Data.SqlDbType.Decimal);
                 cmdAgregar.Parameters.Add("@Inicio", System.Data.SqlDbType.DateTime);
@@ -102,7 +101,6 @@ namespace DAO
                 cmdAgregar.Parameters.Add("@IdUsuario_Sistema", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
                 //ahora los completo
-                cmdAgregar.Parameters["@Id"].Value = tarea.Id;
                 cmdAgregar.Parameters["@Descripcion"].Value = tarea.Descripcion;
                 cmdAgregar.Parameters["@Estimacion"].Value = tarea.Estimacion;
                 cmdAgregar.Parameters["@Inicio"].Value = tarea.Incio;
@@ -206,13 +204,13 @@ namespace DAO
         }
 
 
-        public List<Tarea> tareasByHistoria(int idHist)
+       public List<Tarea> tareasByHistoria(int idHist)
         {
             try
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select * from Tareas where IdHistoria=@id");
+                SqlCommand query = new SqlCommand("select * from Tareas where IdHistoria=@id", Conexion.cn);
                 query.Parameters.AddWithValue("@id", idHist);
 
                 SqlDataReader reader = query.ExecuteReader();
@@ -248,6 +246,22 @@ namespace DAO
             {
                 Conexion.close();
             }
+        }
+        public List<Tarea> buscarTareaPorProyecto(int idProyecto) {
+            try
+            {
+                List<Historia> historias = daoHistoria.historiasPorProyecto(idProyecto);
+                List<Tarea> lsttareas = new List<Tarea>();
+                foreach (Historia his in historias)
+                {
+                    lsttareas.AddRange(this.tareasByHistoria(his.Id));
+                } return lsttareas;
+
+            }
+            catch (Exception ex){
+                throw ex;
+            }
+
         }
 
     }

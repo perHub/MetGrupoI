@@ -41,7 +41,7 @@ namespace ProyectoScrum
             {
                 Session["ProyectoActual"] = conPro.buscarPorId(1); //Hardcodeado.
                 Session["SprintActual"] = conSpr.buscarPorId(1); //Hardcodeado.
-                Session["UsuarioSistema"] = conUsuSis.buscarByID(5);
+                //Session["UsuarioSistema"] = conUsuSis.buscarByID(5);
             }
             catch (Exception ex)
             {

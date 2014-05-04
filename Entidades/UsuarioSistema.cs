@@ -12,6 +12,7 @@ namespace Entidades
         bool administrador;
         int idProyecto;
 
+
         public UsuarioSistema() { 
         
         }

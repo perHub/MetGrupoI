@@ -99,27 +99,10 @@ namespace DAO
                     nombre=reader.GetString(3);
                     password=reader.GetString(4);
                     Conexion.close();
-                }
-                SqlCommand query1 = new SqlCommand("select * from Usuarios_Sistema where id=@ID", Conexion.cn);
-                query.Parameters.Add("@Id", System.Data.SqlDbType.Int);
-                query.Parameters["@Id"].Value = ID;
-                SqlDataReader reader1 = query1.ExecuteReader();
-                bool scrumMaster;
-                bool administrador;
-                int idProyecto;
-                //falta cargar lista de habilidades
-                
-                if (reader1.Read())
-                {
-                    administrador = reader1.GetBoolean(1);
-                    scrumMaster = reader1.GetBoolean(2);
-                    idProyecto = reader1.GetInt32(3);
-                    Conexion.close();
-                    return new Desarrollador();
+                    return new Desarrollador(id, descripcion, empresa, nombre, password, null);
                 }
 
-                
-                else throw new Exception("Ese proyecto no existe.");
+                    else throw new Exception("Ese proyecto no existe.");
 
             }
             catch (Exception ex)

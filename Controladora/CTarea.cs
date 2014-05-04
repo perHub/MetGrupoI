@@ -29,6 +29,9 @@ namespace Controladora
             dataTarea.eliminar(tarea);
             dataTarea.agregar(tarea);
         }
+        public List<Tarea> buscarPorProyecto(int id) {
+            return dataTarea.buscarTareaPorProyecto(id);
+        }
 
     }
 }

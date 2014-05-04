@@ -162,7 +162,7 @@ namespace DAO
                     }
 
                     reader.Close();
-                    //Conexion.close();
+                    Conexion.close();
                     return encontrado;
                 }
                 catch (Exception ex)

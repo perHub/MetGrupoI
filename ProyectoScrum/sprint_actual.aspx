@@ -9,7 +9,7 @@
     <br />
     <br />
     <asp:GridView ID="gvTareas" runat="server" AutoGenerateColumns="False" 
-        CellPadding="4" ForeColor="#333333" Height="20px" Width="923px">
+        CellPadding="4" ForeColor="#333333" Height="20px" Width="923px" >
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:TemplateField HeaderText="Tarea">
