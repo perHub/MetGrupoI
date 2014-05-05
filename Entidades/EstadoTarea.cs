@@ -51,5 +51,13 @@ namespace Entidades
             this.tarea = tarea;
             this.observaciones = observaciones;
         }
+
+        public EstadoTarea(Estado estadoActual, Estado estadoAnterior, DateTime fecha,  string observaciones)
+        {
+            this.estadoActual = estadoActual;
+            this.EstadoAnterior = estadoAnterior;
+            this.fecha = fecha;
+            this.observaciones = observaciones;
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace ProyectoScrum
 
         protected void gvTareas_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            modificar modi = new modificar();
         }
 
     }

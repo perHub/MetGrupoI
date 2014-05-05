@@ -52,7 +52,7 @@ namespace DAO
         {
             try
             {
-                SqlCommand cmdModificar = new SqlCommand("UPDATE Tareas SET Descripcion=@Descripcion,Estimacion=@Estimacion,Inicio=@Inicio,Fin=@Fin,IdHistoria=@IdHistoria, IdUsuario_Sistema=@IdUsuario_Sistema, Observaciones=@Observaciones WHERE Id=@Id)", Conexion.cn);
+                SqlCommand cmdModificar = new SqlCommand("UPDATE Tareas SET Descripcion=@Descripcion,Estimacion=@Estimacion,Inicio=@Inicio,Fin=@Fin,IdHistoria=@IdHistoria, IdUsuario_Sistema=@IdUsuario_Sistema, Observaciones=@Observaciones,@estado=estado WHERE Id=@Id)", Conexion.cn);
                 Conexion.open();
                 //paso parametros
                 cmdModificar.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar);
@@ -63,6 +63,7 @@ namespace DAO
                 cmdModificar.Parameters.Add("@IdUsuario_Sistema", System.Data.SqlDbType.Int);
                 cmdModificar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
                 cmdModificar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+                cmdModificar.Parameters.Add("@estado", System.Data.SqlDbType.VarChar);
                 //ahora los completo
                 cmdModificar.Parameters["@Descripcion"].Value = tarea.Descripcion;
                 cmdModificar.Parameters["@Estimacion"].Value = tarea.Estimacion;
@@ -72,6 +73,7 @@ namespace DAO
                 cmdModificar.Parameters["@IdUsuario_Sistema"].Value = tarea.Owner.Id;
                 cmdModificar.Parameters["@Id"].Value = tarea.Id;
                 cmdModificar.Parameters["@Observaciones"].Value = tarea.Observaciones;
+                cmdModificar.Parameters["@estado"].Value = tarea.Estado;
                 cmdModificar.ExecuteNonQuery();
                 Conexion.close();
             }
@@ -91,7 +93,7 @@ namespace DAO
             try
             {
                 Conexion.open();
-                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Descripcion,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones) VALUES (@Descripcion,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones)", Conexion.cn);
+                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Descripcion,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones, estado) VALUES (@Descripcion,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones, @estado)", Conexion.cn);
                 //paso parametros
                 cmdAgregar.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar);
                 cmdAgregar.Parameters.Add("@Estimacion", System.Data.SqlDbType.Decimal);
@@ -100,7 +102,9 @@ namespace DAO
                 cmdAgregar.Parameters.Add("@IdHistoria", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@IdUsuario_Sistema", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
+                cmdAgregar.Parameters.Add("@estado", System.Data.SqlDbType.VarChar);
                 //ahora los completo
+                cmdAgregar.Parameters["@estado"].Value = "No iniciada";
                 cmdAgregar.Parameters["@Descripcion"].Value = tarea.Descripcion;
                 cmdAgregar.Parameters["@Estimacion"].Value = tarea.Estimacion;
                 cmdAgregar.Parameters["@Inicio"].Value = tarea.Incio;
@@ -135,17 +139,17 @@ namespace DAO
             try
             {
                 Conexion.open();
-                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Estados_Tareas(idEstadoAnterior,idEstadoActual,fecha,idTarea,observaciones) VALUES (@IdEstadoAnterior,@IdEstadoActual,@fecha,@idTarea,@observaciones)", Conexion.cn);
+                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Estados_Tareas(idEstadoAnterior,idEstadoActual,feha,idTarea,observaciones) VALUES (@IdEstadoAnterior,@IdEstadoActual,@fecha,@idTarea,@observaciones)", Conexion.cn);
                 //paso parametros
                 cmdAgregar.Parameters.Add("@IdEstadoAnterior", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@IdEstadoActual", System.Data.SqlDbType.Int);
-                cmdAgregar.Parameters.Add("@fecha", System.Data.SqlDbType.DateTime);
+                cmdAgregar.Parameters.Add("@feha", System.Data.SqlDbType.DateTime);
                 cmdAgregar.Parameters.Add("@idTarea", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@observaciones", System.Data.SqlDbType.VarChar);
-                //ahora los completo
-                cmdAgregar.Parameters["@IdEstadoAnterior"].Value = et.EstadoAnterior;
-                cmdAgregar.Parameters["@IdEstadoActual"].Value = et.EstadoActual;
-                cmdAgregar.Parameters["@fecha"].Value = et.Fecha;
+
+                cmdAgregar.Parameters["@IdEstadoAnterior"].Value = et.EstadoAnterior.Id;
+                cmdAgregar.Parameters["@IdEstadoActual"].Value = et.EstadoActual.Id;
+                cmdAgregar.Parameters["@feha"].Value = et.Fecha;
                 cmdAgregar.Parameters["@idTarea"].Value = et.Tarea;
                 cmdAgregar.Parameters["@observaciones"].Value = et.Observaciones;
                 cmdAgregar.ExecuteNonQuery();
@@ -160,6 +164,65 @@ namespace DAO
                 Conexion.close();
             }
         
+        }
+        public void agregarEstadoTareaConNombre(EstadoTarea et, string descripcion)
+        {
+            try
+            {
+                Conexion.open();
+                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Estados_Tareas(idEstadoAnterior,idEstadoActual,feha,idTarea,observaciones) VALUES (@IdEstadoAnterior,@IdEstadoActual,@fecha,@idTarea,@observaciones)", Conexion.cn);
+                //paso parametros
+                cmdAgregar.Parameters.Add("@IdEstadoAnterior", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters.Add("@IdEstadoActual", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters.Add("@fecha", System.Data.SqlDbType.DateTime);
+                cmdAgregar.Parameters.Add("@idTarea", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters.Add("@observaciones", System.Data.SqlDbType.VarChar);
+
+                cmdAgregar.Parameters["@IdEstadoAnterior"].Value = et.EstadoAnterior.Id;
+                cmdAgregar.Parameters["@IdEstadoActual"].Value = et.EstadoActual.Id;
+                cmdAgregar.Parameters["@fecha"].Value = et.Fecha;
+                cmdAgregar.Parameters["@idTarea"].Value = this.buscaIDporDescripcion(descripcion);
+                cmdAgregar.Parameters["@observaciones"].Value = et.Observaciones;
+                Conexion.open();
+                cmdAgregar.ExecuteNonQuery();
+                Conexion.close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+
+        }
+        public int buscaIDporDescripcion(String descripcion) {
+            try{
+              
+                Conexion.open();
+                int idInsertado = new int();
+                SqlCommand query = new SqlCommand("select id from Tareas where Descripcion=@descripcion;", Conexion.cn);
+                query.Parameters.Add("@descripcion", System.Data.SqlDbType.VarChar);
+                query.Parameters["@descripcion"].Value = descripcion;
+                SqlDataReader reader = query.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                foreach (DataRow dr in dt.Rows)
+                {
+
+                    idInsertado = Convert.ToInt32(dr["id"]);
+                }
+                return idInsertado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally {
+                Conexion.close();
+            }
+
         }
         public List<EstadoTarea> buscarEstadosByIdTarea(int idTarea) {
             try
@@ -292,7 +355,7 @@ namespace DAO
             {
                 Conexion.open();
 
-                SqlCommand query = new SqlCommand("select t.Id, t.Descripcion,t.Estimacion,t.Inicio,t.Fin,t.IdHistoria,t.IdUsuario_Sistema,t.Observaciones, e.Nombre,MAX(et.Feha) from Tareas t inner join Estados_Tareas et on t.Id=et.IdTarea inner join Estados e on e.Id=et.IdEstadoActual group by t.id,Descripcion, nombre,Feha,Estimacion,inicio,fin,IdHistoria,IdUsuario_Sistema,t.Observaciones;", Conexion.cn);
+                SqlCommand query = new SqlCommand("select * from Tareas where IdHistoria=@id;", Conexion.cn);
                 query.Parameters.AddWithValue("@id", idHist);
                 query.Parameters["@id"].Value = idHist; ;
 
@@ -315,7 +378,7 @@ namespace DAO
                     decimal est = Convert.ToDecimal(dr["Estimacion"]);
                     int idHistoria = Convert.ToInt32(dr["idHistoria"]);
                     string observaciones=Convert.ToString(dr["observaciones"]);
-                    String estado = Convert.ToString(dr["nombre"]);
+                    String estado = Convert.ToString(dr["estado"]);
 
                     //Guardo las comprobaciones.
                     Boolean tieneInicio = dr["Inicio"] != DBNull.Value;

@@ -32,6 +32,9 @@ namespace Controladora
         public List<Tarea> buscarPorSprint(int id) {
             return dataTarea.historiasporSprint(id);
         }
+        public void agregarEstadoTareaConDesc(EstadoTarea et, String descipcion) {
+            dataTarea.agregarEstadoTareaConNombre(et, descipcion);
+        }
 
     }
 }

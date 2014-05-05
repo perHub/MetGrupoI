@@ -23,7 +23,6 @@ namespace ProyectoScrum
                 historiaDropDown.DataValueField = "Id";
                 historiaDropDown.DataSource = chistoria.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
                 historiaDropDown.DataBind();
-
                 error.Visible = true;
                 error.Text = "el proyecto corriendo es :" + ((Proyecto)Session["ProyectoActual"]).Id.ToString();
 
@@ -40,10 +39,13 @@ namespace ProyectoScrum
                 Desarrollador desarrollador = new Desarrollador(5, "", 1, "", "", null);
                 Historia historia = chistoria.buscarPorId(Convert.ToInt32(historiaDropDown.SelectedValue));
                 ctarea.agregar(txtNom.Text, Convert.ToDecimal(EstimacionTXT.Text),Calendar1.SelectedDate, Calendar2.SelectedDate, historia,txtDesc.Text,desarrollador);
+                Estado e1 = new Estado(1, "No iniciada");
+                EstadoTarea et = new EstadoTarea(e1, e1, DateTime.Today, "");
+                ctarea.agregarEstadoTareaConDesc(et, txtNom.Text);
             }catch (Exception ex){
                 
             }
-            //Response.Redirect("/sprint_actual.aspx");
+            Response.Redirect("/sprint_actual.aspx");
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
