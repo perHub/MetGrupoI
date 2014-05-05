@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Entidades;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace DAO
 {
-    class DAOestados: IDAO<Estado>
+    public class DAOestados: IDAO<Estado>
     {
         private static DAOestados _instance;
 
@@ -92,7 +93,38 @@ namespace DAO
 
         public List<Estado> traerTodos()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Conexion.open();
+
+                SqlCommand query = new SqlCommand("select * from Estados", Conexion.cn);
+                SqlDataReader reader = query.ExecuteReader();
+
+                List<Estado> lstEstado = new List<Estado>();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                Conexion.close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["id"]);
+                    string nombre = Convert.ToString(dr["nombre"]);
+                    Estado estado = new Estado(id, nombre);
+                    lstEstado.Add(estado);
+                }
+
+                return lstEstado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+
         }
 
     }

@@ -128,7 +128,65 @@ namespace DAO
 
         public Tarea buscarPorID(int ID)
         {
-            throw new NotImplementedException();
+            try{
+                Conexion.open();
+                SqlCommand query = new SqlCommand("select * from Tareas where Id=@id;", Conexion.cn);
+                query.Parameters.AddWithValue("@id", ID);
+                query.Parameters["@id"].Value = ID; ;
+
+                SqlDataReader reader = query.ExecuteReader();
+
+                DAOProyecto DAOPro = DAOProyecto.Instance();
+                DAOSprint DAOSpr = DAOSprint.Instance();
+
+                Tarea tarea = new Tarea();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                reader.Close();
+                Conexion.close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int id = Convert.ToInt32(dr["Id"]);
+                    String desc = Convert.ToString(dr["Descripcion"]);
+                    decimal est = Convert.ToDecimal(dr["Estimacion"]);
+                    int idHistoria = Convert.ToInt32(dr["idHistoria"]);
+                    string observaciones=Convert.ToString(dr["observaciones"]);
+                    String estado = Convert.ToString(dr["estado"]);
+
+                    //Guardo las comprobaciones.
+                    Boolean tieneInicio = dr["Inicio"] != DBNull.Value;
+                    Boolean tieneFin = dr["Fin"] != DBNull.Value;
+                    Boolean tieneusu = dr["idUsuario_Sistema"] != DBNull.Value;
+                    Historia historia = daoHistoria.buscarPorID(Convert.ToInt32(dr["idHistoria"]));
+                    tarea = new Tarea(id, desc, est, historia, observaciones,estado);
+
+                    if (tieneInicio)
+                        tarea.Incio = Convert.ToDateTime(dr["inicio"]);
+
+                    if (tieneFin)
+                        tarea.Fin = Convert.ToDateTime(dr["Fin"]);
+
+                    if (tieneusu)
+                        tarea.Owner = daoUsuarioSistema.buscarPorID(Convert.ToInt32(dr["idUsuario_Sistema"]));
+
+                }
+
+                return tarea;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+
+
+
+
         }
         public List<Tarea> traerTodos()
         {
@@ -143,13 +201,13 @@ namespace DAO
                 //paso parametros
                 cmdAgregar.Parameters.Add("@IdEstadoAnterior", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@IdEstadoActual", System.Data.SqlDbType.Int);
-                cmdAgregar.Parameters.Add("@feha", System.Data.SqlDbType.DateTime);
+                cmdAgregar.Parameters.Add("@fecha", System.Data.SqlDbType.DateTime);
                 cmdAgregar.Parameters.Add("@idTarea", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@observaciones", System.Data.SqlDbType.VarChar);
 
                 cmdAgregar.Parameters["@IdEstadoAnterior"].Value = et.EstadoAnterior.Id;
                 cmdAgregar.Parameters["@IdEstadoActual"].Value = et.EstadoActual.Id;
-                cmdAgregar.Parameters["@feha"].Value = et.Fecha;
+                cmdAgregar.Parameters["@fecha"].Value = et.Fecha;
                 cmdAgregar.Parameters["@idTarea"].Value = et.Tarea;
                 cmdAgregar.Parameters["@observaciones"].Value = et.Observaciones;
                 cmdAgregar.ExecuteNonQuery();

@@ -9,6 +9,6 @@
     <br />
     <br />
     <asp:GridView ID="gvTareas" runat="server" 
-        onselectedindexchanged="gvTareas_SelectedIndexChanged">
+        onselectedindexchanged="gvTareas_SelectedIndexChanged" autogenerateselectbutton="True">
     </asp:GridView>
 </asp:Content>

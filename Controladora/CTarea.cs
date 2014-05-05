@@ -35,6 +35,9 @@ namespace Controladora
         public void agregarEstadoTareaConDesc(EstadoTarea et, String descipcion) {
             dataTarea.agregarEstadoTareaConNombre(et, descipcion);
         }
+        public Tarea buscarPorID(int id) {
+            return dataTarea.buscarPorID(id);
+        }
 
     }
 }

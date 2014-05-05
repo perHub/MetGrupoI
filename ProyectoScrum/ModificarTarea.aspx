@@ -31,13 +31,19 @@
         </tr>
      </table>
     <p>
+        <asp:Label ID="Label1" runat="server" Text="Estado  "></asp:Label>
+        <asp:DropDownList ID="DropEstados" runat="server">
+        </asp:DropDownList>
+    </p>
+    <p>
         Descripción:<br />
         <asp:TextBox ID="txtDesc" runat="server" Height="74px" style="margin-top: 0px" 
             TextMode="MultiLine" Width="219px"></asp:TextBox> 
     </p>
 
-        <div style="text-indent: 282px; width: 282px;"><asp:Button ID="btnCrear" 
-                runat="server" Text="Crear" onclick="btnCrear_Click" /> </div>
+        <div style="text-indent: 282px; width: 282px;">
+            <asp:Button ID="btnCrear" 
+                runat="server" Text="Modificar" onclick="btnCrear_Click" /> </div>
 
 
     <p>

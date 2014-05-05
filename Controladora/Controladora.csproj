@@ -47,6 +47,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CEstados.cs" />
     <Compile Include="CHistoria.cs" />
     <Compile Include="CUsuario_sistema.cs" />
   </ItemGroup>
