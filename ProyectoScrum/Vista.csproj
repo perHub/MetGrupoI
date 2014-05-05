@@ -56,6 +56,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="ModificarTarea.aspx" />
     <Content Include="nueva_historia.aspx" />
     <Content Include="nueva_tarea.aspx" />
     <Content Include="nuevo_sprint.aspx" />
@@ -131,6 +132,13 @@
     </Compile>
     <Compile Include="gvHU.master.designer.cs">
       <DependentUpon>gvHU.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarTarea.aspx.cs">
+      <DependentUpon>ModificarTarea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarTarea.aspx.designer.cs">
+      <DependentUpon>ModificarTarea.aspx</DependentUpon>
     </Compile>
     <Compile Include="nueva_historia.aspx.cs">
       <DependentUpon>nueva_historia.aspx</DependentUpon>

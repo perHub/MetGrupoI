@@ -32,7 +32,9 @@ namespace ProyectoScrum
 
         protected void gvTareas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            modificar modi = new modificar();
+            GridViewRow row= gvTareas.SelectedRow;
+            Session["idTareaSeleccionada"] = Convert.ToInt32(row.Cells[1]);
+            Response.Redirect("/ModificarTarea.aspx");
         }
 
     }
