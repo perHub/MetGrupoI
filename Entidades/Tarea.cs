@@ -33,6 +33,14 @@ namespace Entidades
             this.observaciones = observ;
             this.Estado = estado;
         }
+        public Tarea(string descr, decimal estima, Historia h, String observ, string estado)
+        {
+            this.descripcion = descr;
+            this.estimacion = estima;
+            this.historia = h;
+            this.observaciones = observ;
+            this.Estado = estado;
+        }
 
         public List<EstadoTarea> ListaDeEstados
         {

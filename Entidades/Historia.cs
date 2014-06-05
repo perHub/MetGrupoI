@@ -72,9 +72,8 @@ namespace Entidades
             get { return numero; }
             set { numero = value; }
         }
-        public Historia() { 
-        
-        }
+
+
         public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
                             DateTime Inicio, DateTime Fin, int num){
             this.id = id;

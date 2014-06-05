@@ -43,7 +43,7 @@ namespace ProyectoScrum
                 EstadoTarea et = new EstadoTarea(e1, e1, DateTime.Today, "");
                 ctarea.agregarEstadoTareaConDesc(et, txtNom.Text);
             }catch (Exception ex){
-                
+                alert.mostrarExAlert(ex, this);
             }
             Response.Redirect("/sprint_actual.aspx");
         }

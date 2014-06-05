@@ -12,12 +12,25 @@ namespace Controladora
     {
         DAOTarea dataTarea = DAOTarea.Instance();
 
+        //Arreglar, sacar fechas y usuario-sistema.
+
         public void agregar(String desc,  decimal estima, DateTime ffin, DateTime fini, Historia hist, String obse, UsuarioSistema usu)
         {
 
             Tarea auxTarea = new Tarea(desc, estima, ffin, fini, hist, obse, usu);
             dataTarea.agregar(auxTarea);
         }
+
+        //Correción:
+
+        public void agregar(string descr, decimal estima, Historia h, String observ, string estado)
+        {
+            Tarea t = new Tarea(descr, estima, h, observ, estado); //Agregar constructor sin estado.
+            dataTarea.agregar(t);
+        }
+
+
+
 
         public void eliminar(Tarea tarea)
         {
