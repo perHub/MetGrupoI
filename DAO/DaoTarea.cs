@@ -54,6 +54,11 @@ namespace DAO
         {
             try
             {
+                int? idUsr = (int?)ejecutarSQL_Scalar("select idusuario_sistema from Tareas where id=" + tarea.Id);
+
+                if (idUsr != null && idUsr != tarea.Owner.Id)
+                    throw new noPuedeCambiarseResponsableException();
+
                 SqlCommand cmdModificar = new SqlCommand("UPDATE Tareas SET Descripcion=@Descripcion,Estimacion=@Estimacion,Inicio=@Inicio,Fin=@Fin,IdHistoria=@IdHistoria, IdUsuario_Sistema=@IdUsuario_Sistema, Observaciones=@Observaciones,@estado=estado WHERE Id=@Id)", Conexion.cn);
                 Conexion.open();
                 //paso parametros
@@ -81,7 +86,7 @@ namespace DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -240,10 +245,41 @@ namespace DAO
             throw new NotImplementedException();
         }
 
+        public object ejecutarSQL_Scalar(string cmdtext)
+        {
+            SqlCommand cmd = new SqlCommand(cmdtext, Conexion.cn);
+            Conexion.open();
+
+            object res = cmd.ExecuteScalar();               //Se necesitará castear.
+            Conexion.close();
+            return res;                                     //Retorna el escalar (que será un valor cualquieradela BD(ID,Nombre, etc.)).
+        }
+        public Boolean estadoTareaExisteEnEseMomento(EstadoTarea et)
+        {
+            int cont = (int)ejecutarSQL_Scalar("select count(id) from Estados_Tareas where Feha=' " + et.Fecha.ToString("MM/dd/yyyy HH:mm:ss.fff") + "' and IdTarea=" + et.oTarea.Id);
+
+            return cont > 0;
+        }
+
+        public void eliminarEstadoPorFecha(EstadoTarea et) //También tiene encuenta el idtarea
+        {
+            String cmdtext = "delete from Estados_Tareas where idtarea=" + et.oTarea.Id + " and Feha='" + et.Fecha.ToString("MM/dd/yyyy HH:mm:ss.fff") + "'";
+            SqlCommand cmd = new SqlCommand(cmdtext, Conexion.cn);
+            Conexion.open();
+            cmd.ExecuteNonQuery();
+            Conexion.close();
+        }
         public void agregarEstadoTarea(EstadoTarea et) {
             try
             {
+               
+                if (estadoTareaExisteEnEseMomento(et))
+                {
+                    throw new YaPoseeEstadoEnEseMomentoException();
+                }
+
                 Conexion.open();
+
                 SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Estados_Tareas(idEstadoAnterior,idEstadoActual,feha,idTarea,observaciones) VALUES (@IdEstadoAnterior,@IdEstadoActual,@fecha,@idTarea,@observaciones)", Conexion.cn);
                 //paso parametros
                 cmdAgregar.Parameters.Add("@IdEstadoAnterior", System.Data.SqlDbType.Int);

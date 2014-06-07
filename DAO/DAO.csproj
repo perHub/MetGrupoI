@@ -54,6 +54,8 @@
     <Compile Include="DAOUsuario_Sistema.cs" />
     <Compile Include="DaoTarea.cs" />
     <Compile Include="IDAO.cs" />
+    <Compile Include="noPuedeCambiarseResponsableException.cs" />
+    <Compile Include="YaPoseeEstadoEnEseMomentoException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -39,8 +39,7 @@ namespace Controladora
 
         public void modificar(int id, Tarea tarea)
         {
-            dataTarea.eliminar(tarea);
-            dataTarea.agregar(tarea);
+            dataTarea.modificar(id, tarea);
         }
         public List<Tarea> buscarPorSprint(int id) {
             return dataTarea.historiasporSprint(id);
@@ -53,8 +52,14 @@ namespace Controladora
         {
             dataTarea.agregarEstadoTarea(et);
         }
+
         public Tarea buscarPorID(int id) {
             return dataTarea.buscarPorID(id);
+        }
+
+        public void eliminarEstadoPorFecha(EstadoTarea et)
+        {
+            dataTarea.eliminarEstadoPorFecha(et);
         }
 
     }
