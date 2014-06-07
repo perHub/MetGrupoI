@@ -255,7 +255,7 @@ namespace DAO
                 cmdAgregar.Parameters["@IdEstadoAnterior"].Value = et.EstadoAnterior.Id;
                 cmdAgregar.Parameters["@IdEstadoActual"].Value = et.EstadoActual.Id;
                 cmdAgregar.Parameters["@fecha"].Value = et.Fecha;
-                cmdAgregar.Parameters["@idTarea"].Value = et.Tarea;
+                cmdAgregar.Parameters["@idTarea"].Value = et.oTarea.Id;
                 cmdAgregar.Parameters["@observaciones"].Value = et.Observaciones;
                 cmdAgregar.ExecuteNonQuery();
                 Conexion.close();
@@ -355,7 +355,8 @@ namespace DAO
                     String observaciones= Convert.ToString(dr["observaciones"]);
                     Estado actual = daoEstados.buscarPorID(idEstadoActual);
                     Estado anterior= daoEstados.buscarPorID(idEstadoAnterior);
-                    EstadoTarea estadoTarea = new EstadoTarea(actual, anterior, fecha, idTarea, observaciones);
+                    Tarea oTarea = buscarPorID(idTarea);
+                    EstadoTarea estadoTarea = new EstadoTarea(actual, anterior, fecha, oTarea, observaciones);
                     lstEstadoTarea.Add(estadoTarea);
                 }
 

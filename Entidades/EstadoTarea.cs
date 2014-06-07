@@ -11,7 +11,7 @@ namespace Entidades
         Estado estadoAnterior;
         DateTime fecha;
         String observaciones;
-        int tarea;
+       Tarea otarea;
 
         public Estado EstadoActual
         {
@@ -35,20 +35,20 @@ namespace Entidades
             set { observaciones = value; }
         }
 
-        public int Tarea
+        public Tarea oTarea
         {
-            get { return tarea; }
-            set { tarea = value; }
+            get { return otarea; }
+            set { otarea = value; }
         }
         public EstadoTarea() { 
         
         }
-        public EstadoTarea(Estado estadoActual, Estado estadoAnterior, DateTime fecha, int tarea,string observaciones)
+        public EstadoTarea(Estado estadoActual, Estado estadoAnterior, DateTime fecha, Tarea tarea,string observaciones)
         {
             this.estadoActual = estadoActual;
             this.EstadoAnterior = estadoAnterior;
             this.fecha = fecha;
-            this.tarea = tarea;
+            this.otarea = tarea;
             this.observaciones = observaciones;
         }
 
