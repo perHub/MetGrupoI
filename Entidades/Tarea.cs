@@ -16,6 +16,7 @@ namespace Entidades
         string observaciones;
         UsuarioSistema owner;
         string estado;
+        List<EstadoTarea> listaDeEstados = new List<EstadoTarea>();
 
         public string Estado
         {
@@ -23,29 +24,10 @@ namespace Entidades
             set { estado = value; }
         }
 
-        List<EstadoTarea> listaDeEstados;
-
-        public Tarea(int id, string descr, decimal estima,Historia h, String observ, string estado){
-            this.id = id;
-            this.descripcion = descr;
-            this.estimacion = estima;
-            this.historia = h;
-            this.observaciones = observ;
-            this.Estado = estado;
-        }
-        public Tarea(string descr, decimal estima, Historia h, String observ, string estado)
-        {
-            this.descripcion = descr;
-            this.estimacion = estima;
-            this.historia = h;
-            this.observaciones = observ;
-            this.Estado = estado;
-        }
-
         public List<EstadoTarea> ListaDeEstados
         {
-            get { return listaDeEstados; }
             set { listaDeEstados = value; }
+            get { return listaDeEstados; }
         }
 
 
@@ -122,5 +104,28 @@ namespace Entidades
             this.owner = owner;
         }
 
+
+        public Tarea(int id, string descr, decimal estima, Historia h, String observ, string estado)
+        {
+            this.id = id;
+            this.descripcion = descr;
+            this.estimacion = estima;
+            this.historia = h;
+            this.observaciones = observ;
+            this.Estado = estado;
+        }
+        public Tarea(string descr, decimal estima, Historia h, String observ, string estado)
+        {
+            this.descripcion = descr;
+            this.estimacion = estima;
+            this.historia = h;
+            this.observaciones = observ;
+            this.Estado = estado;
+        }
+
+        public void agregarEstadoTarea(EstadoTarea ET)
+        {
+            listaDeEstados.Add(ET);
+        }
     }
 }
