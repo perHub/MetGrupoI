@@ -32,7 +32,9 @@ namespace DAO
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("DELETE tareas WHERE Id = @Id", Conexion.cn);
+                Conexion.open();
+
+                SqlCommand cmd = new SqlCommand("DELETE from tareas WHERE Id = @Id", Conexion.cn);
                 cmd.Parameters.Add("@Id", System.Data.SqlDbType.Int);
                 //ahora los completo
                 cmd.Parameters["@Id"].Value = tarea.Id;
@@ -40,7 +42,7 @@ namespace DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -88,33 +90,77 @@ namespace DAO
         }
 
 
-        public void agregar(Tarea tarea)
+        public void agregar(Tarea tarea) //Agregué unas comprobaciones para que el test funcionara, 
+                                         // lo ideal sería rehacer este método para que sólo inserte una tarea "básica", (sin el IdUsuarioSistema, ni Inicio, ni Fin, como lo hablamos en clase)
+                                         // Tener en cuenta que el cammpo IdUsuarioSIstema en la BD debe aceptar nulls (actualmente no es así)
         {
             try
             {
                 Conexion.open();
-                SqlCommand cmdAgregar = new SqlCommand("INSERT INTO Tareas(Descripcion,Estimacion,Inicio,Fin,IdHistoria, IdUsuario_Sistema, Observaciones, estado) VALUES (@Descripcion,@Estimacion,@Inicio,@Fin,@IdHistoria, @IdUsuario_Sistema, @Observaciones, @estado)", Conexion.cn);
+
+                Boolean tieneOwner = tarea.Owner != null;
+                Boolean tieneInicio = tarea.Incio != null;
+                Boolean tieneFin = tarea.Fin != null;
+
+                String cmd = "INSERT INTO Tareas(Descripcion,Estimacion,IdHistoria, Observaciones, estado"; //Valores que siempre deberán estar disponibles (no nulos).
+
+                //Cmprobaciones:
+
+                if (tieneOwner)
+                    cmd += ", IdUsuario_Sistema";
+                if (tieneInicio)
+                    cmd += ", Inicio";
+                if (tieneFin)
+                    cmd += ", Fin";
+
+                cmd += ") values (@Descripcion,@Estimacion,@IdHistoria, @Observaciones, @estado";
+
+                if (tieneOwner)
+                    cmd += ", @IdUsuario_Sistema";
+                if (tieneInicio)
+                    cmd += ", @Inicio";
+                if (tieneFin)
+                    cmd += ", @Fin";
+
+                cmd += ")";
+
+                SqlCommand cmdAgregar = new SqlCommand(cmd, Conexion.cn);
+
+
                 //paso parametros
                 cmdAgregar.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar);
                 cmdAgregar.Parameters.Add("@Estimacion", System.Data.SqlDbType.Decimal);
-                cmdAgregar.Parameters.Add("@Inicio", System.Data.SqlDbType.DateTime);
-                cmdAgregar.Parameters.Add("@Fin", System.Data.SqlDbType.DateTime);
                 cmdAgregar.Parameters.Add("@IdHistoria", System.Data.SqlDbType.Int);
-                cmdAgregar.Parameters.Add("@IdUsuario_Sistema", System.Data.SqlDbType.Int);
                 cmdAgregar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
                 cmdAgregar.Parameters.Add("@estado", System.Data.SqlDbType.VarChar);
                 //ahora los completo
                 cmdAgregar.Parameters["@estado"].Value = "No iniciada";
                 cmdAgregar.Parameters["@Descripcion"].Value = tarea.Descripcion;
                 cmdAgregar.Parameters["@Estimacion"].Value = tarea.Estimacion;
-                cmdAgregar.Parameters["@Inicio"].Value = tarea.Incio;
-                cmdAgregar.Parameters["@Fin"].Value = tarea.Fin;
                 cmdAgregar.Parameters["@IdHistoria"].Value = tarea.Historia.Id;
-                cmdAgregar.Parameters["@IdUsuario_Sistema"].Value = tarea.Owner.Id;
                 cmdAgregar.Parameters["@Observaciones"].Value = tarea.Observaciones;
 
+                if (tieneOwner)
+                {
+                    cmdAgregar.Parameters.Add("@IdUsuario_Sistema", System.Data.SqlDbType.Int);
+                    cmdAgregar.Parameters["@IdUsuario_Sistema"].Value = tarea.Owner.Id;
+                }
+                if (tieneInicio)
+                {
+                    cmdAgregar.Parameters.Add("@Inicio", System.Data.SqlDbType.DateTime);
+                    cmdAgregar.Parameters["@Inicio"].Value = tarea.Fin;
+                }
+
+                if (tieneFin)
+                {
+                    cmdAgregar.Parameters.Add("@Fin", System.Data.SqlDbType.DateTime);
+                    cmdAgregar.Parameters["@Fin"].Value = tarea.Fin;
+                }
+
                 cmdAgregar.ExecuteNonQuery();
-                Conexion.close();
+
+
+
             }
             catch (Exception ex)
             {
@@ -124,6 +170,7 @@ namespace DAO
             {
                 Conexion.close();
             }
+
         }
 
         public Tarea buscarPorID(int ID)
@@ -480,7 +527,70 @@ namespace DAO
            } return lstarea;
        }
 
-        
+       public Tarea traerTareaPorConsulta(String consulta, List<SqlParameter> parametros)
+       {
+           try
+           {
+               Conexion.open();
+               SqlCommand query = new SqlCommand(consulta, Conexion.cn);
+
+               foreach (SqlParameter p in parametros)
+               {
+                   query.Parameters.Add(p);
+               }
+
+               SqlDataReader reader = query.ExecuteReader();
+
+               DAOProyecto DAOPro = DAOProyecto.Instance();
+               DAOSprint DAOSpr = DAOSprint.Instance();
+
+               Tarea tarea = new Tarea();
+
+               DataTable dt = new DataTable();
+               dt.Load(reader);
+               reader.Close();
+               Conexion.close();
+
+               foreach (DataRow dr in dt.Rows)
+               {
+                   int id = Convert.ToInt32(dr["Id"]);
+                   String desc = Convert.ToString(dr["Descripcion"]);
+                   decimal est = Convert.ToDecimal(dr["Estimacion"]);
+                   int idHistoria = Convert.ToInt32(dr["idHistoria"]);
+                   string observaciones = Convert.ToString(dr["observaciones"]);
+                   String estado = Convert.ToString(dr["estado"]);
+
+                   //Guardo las comprobaciones.
+                   Boolean tieneInicio = dr["Inicio"] != DBNull.Value;
+                   Boolean tieneFin = dr["Fin"] != DBNull.Value;
+                   Boolean tieneusu = dr["idUsuario_Sistema"] != DBNull.Value;
+                   Historia historia = daoHistoria.buscarPorID(Convert.ToInt32(dr["idHistoria"]));
+                   tarea = new Tarea(id, desc, est, historia, observaciones, estado);
+
+                   if (tieneInicio)
+                       tarea.Incio = Convert.ToDateTime(dr["inicio"]);
+
+                   if (tieneFin)
+                       tarea.Fin = Convert.ToDateTime(dr["Fin"]);
+
+                   if (tieneusu)
+                       tarea.Owner = daoUsuarioSistema.buscarPorID(Convert.ToInt32(dr["idUsuario_Sistema"]));
+
+               }
+
+               return tarea;
+           }
+           catch (Exception ex)
+           {
+               throw ex;
+           }
+           finally
+           {
+               Conexion.close();
+           }
+
+
+       }
 
     }
 }

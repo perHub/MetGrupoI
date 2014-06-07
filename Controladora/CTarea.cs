@@ -23,9 +23,9 @@ namespace Controladora
 
         //Correción:
 
-        public void agregar(string descr, decimal estima, Historia h, String observ, string estado)
+        public void agregar(string descr, decimal estima, Historia h, String observ)
         {
-            Tarea t = new Tarea(descr, estima, h, observ, estado); //Agregar constructor sin estado.
+            Tarea t = new Tarea(descr, estima, h, observ, "No iniciada."); //Agregar constructor sin estado.
             dataTarea.agregar(t);
         }
 

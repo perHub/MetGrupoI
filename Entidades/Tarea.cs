@@ -10,8 +10,8 @@ namespace Entidades
         int id;
         String descripcion;
         decimal estimacion;
-        DateTime fin;
-        DateTime inicio;
+        DateTime? fin = null;
+        DateTime? inicio = null;
         Historia historia;
         string observaciones;
         UsuarioSistema owner;
@@ -68,13 +68,13 @@ namespace Entidades
             set { estimacion = value; }
         }
 
-        public DateTime Fin
+        public DateTime? Fin
         {
             get { return fin; }
             set { fin = value; }
         }
 
-        public DateTime Incio
+        public DateTime? Incio
         {
             get { return inicio; }
             set { inicio = value; }
