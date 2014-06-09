@@ -12,7 +12,6 @@
     <p>
         Nombre:
         <asp:TextBox ID="txtNom" runat="server" Width="94px"></asp:TextBox>
-        <asp:Label ID="error" runat="server" Text="Label"></asp:Label>
     </p>
     <asp:Label ID="lb" runat="server" Text="Estimacion"></asp:Label>
         <asp:TextBox ID="EstimacionTXT" runat="server" Width="90px"></asp:TextBox>
@@ -32,7 +31,7 @@
      </table>
     <p>
         <asp:Label ID="Label1" runat="server" Text="Estado  "></asp:Label>
-        <asp:DropDownList ID="DropEstados" runat="server">
+        <asp:DropDownList ID="DropEstados" runat="server" >
         </asp:DropDownList>
     </p>
     <p>

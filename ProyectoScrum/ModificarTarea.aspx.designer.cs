@@ -49,15 +49,6 @@ namespace ProyectoScrum {
         protected global::System.Web.UI.WebControls.TextBox txtNom;
         
         /// <summary>
-        /// error control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label error;
-        
-        /// <summary>
         /// lb control.
         /// </summary>
         /// <remarks>
