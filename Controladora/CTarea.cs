@@ -73,11 +73,6 @@ namespace Controladora
             dataTarea.agregarEstadoTarea(et);
         }
 
-        public void agregarEstadoTarea(EstadoTarea et)
-        {
-            dataTarea.agregarEstadoTarea(et);
-        }
-
         public Tarea buscarPorID(int id) {
             return dataTarea.buscarPorID(id);
         }
