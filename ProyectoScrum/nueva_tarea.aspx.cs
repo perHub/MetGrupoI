@@ -23,25 +23,45 @@ namespace ProyectoScrum
                 historiaDropDown.DataValueField = "Id";
                 historiaDropDown.DataSource = chistoria.historiasPorProyecto(((Proyecto)Session["ProyectoActual"]).Id);
                 historiaDropDown.DataBind();
-                error.Visible = true;
-                error.Text = "el proyecto corriendo es :" + ((Proyecto)Session["ProyectoActual"]).Id.ToString();
-
-            }
+                  }
             catch (Exception ex) {
-                error.Text = "excepcion";
+                throw ex;
             }
 
+        }
+        public DateTime? verificarInicio() {
+            DateTime? inicio = null;
+            if (Calendar1.SelectedDate != Convert.ToDateTime(inicio))
+            {
+                inicio = Calendar1.SelectedDate;
+            }
+            return inicio;
+        }
+
+        public DateTime? verificarFin(){
+
+            DateTime? fin = null;
+            if (Calendar2.SelectedDate != fin.GetValueOrDefault())
+            {
+                fin = Calendar2.SelectedDate;
+            }
+            return fin;
         }
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             try{
-                Desarrollador desarrollador = new Desarrollador(5, "", 1, "", "", null);
                 Historia historia = chistoria.buscarPorId(Convert.ToInt32(historiaDropDown.SelectedValue));
-                ctarea.agregar(txtNom.Text, Convert.ToDecimal(EstimacionTXT.Text),Calendar1.SelectedDate, Calendar2.SelectedDate, historia,txtDesc.Text,desarrollador);
+                ctarea.agregar(txtNom.Text, Convert.ToDecimal(EstimacionTXT.Text), historia, txtDesc.Text);
                 Estado e1 = new Estado(1, "No iniciada");
                 EstadoTarea et = new EstadoTarea(e1, e1, DateTime.Today, "");
                 ctarea.agregarEstadoTareaConDesc(et, txtNom.Text);
+                if (verificarInicio() != null) { 
+                    ctarea.setFechaInicio(Convert.ToDateTime(verificarInicio()),ctarea.buscarTareaByDescripcion(txtNom.Text));
+                }
+                if (verificarFin() != null) { 
+                    ctarea.setFechaFin(Convert.ToDateTime(verificarFin()),ctarea.buscarTareaByDescripcion(txtNom.Text));
+                }
             }catch (Exception ex){
                 alert.mostrarExAlert(ex, this);
             }

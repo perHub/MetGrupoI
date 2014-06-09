@@ -93,6 +93,38 @@ namespace DAO
                 Conexion.close();
             }
         }
+        public void modificarConNulls(int id, Tarea tarea)
+        {
+            try
+            {
+                SqlCommand cmdModificar = new SqlCommand("UPDATE Tareas SET Descripcion=@Descripcion,Estimacion=@Estimacion,IdHistoria=@IdHistoria, Observaciones=@Observaciones,@estado=estado WHERE Id=@Id", Conexion.cn);
+                Conexion.open();
+
+                cmdModificar.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar);
+                cmdModificar.Parameters.Add("@Estimacion", System.Data.SqlDbType.Decimal);
+                cmdModificar.Parameters.Add("@IdHistoria", System.Data.SqlDbType.Int);
+                cmdModificar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
+                cmdModificar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+                cmdModificar.Parameters.Add("@estado", System.Data.SqlDbType.VarChar);
+
+                cmdModificar.Parameters["@Descripcion"].Value = tarea.Descripcion;
+                cmdModificar.Parameters["@Estimacion"].Value = tarea.Estimacion;
+                cmdModificar.Parameters["@IdHistoria"].Value = tarea.Historia.Id;
+                cmdModificar.Parameters["@Id"].Value = tarea.Id;
+                cmdModificar.Parameters["@Observaciones"].Value = tarea.Observaciones;
+                cmdModificar.Parameters["@estado"].Value = tarea.Estado;
+                cmdModificar.ExecuteNonQuery();
+                Conexion.close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        }
 
 
         public void agregar(Tarea tarea) //Agregué unas comprobaciones para que el test funcionara, 
@@ -160,6 +192,7 @@ namespace DAO
                 {
                     cmdAgregar.Parameters.Add("@Fin", System.Data.SqlDbType.DateTime);
                     cmdAgregar.Parameters["@Fin"].Value = tarea.Fin;
+
                 }
 
                 cmdAgregar.ExecuteNonQuery();
@@ -177,7 +210,135 @@ namespace DAO
             }
 
         }
+        public void agregarConNulls(Tarea tarea) {
+            try
+            {
+                Conexion.open();
+                String cmd = "INSERT INTO Tareas(Descripcion,Estimacion,IdHistoria, Observaciones, estado) values (@Descripcion,@Estimacion,@IdHistoria, @Observaciones, @estado)"; //Valores que siempre deberán estar disponibles (no nulos).
+                SqlCommand cmdAgregar = new SqlCommand(cmd, Conexion.cn);
+                //paso parametros
+                cmdAgregar.Parameters.Add("@Descripcion", System.Data.SqlDbType.VarChar);
+                cmdAgregar.Parameters.Add("@Estimacion", System.Data.SqlDbType.Decimal);
+                cmdAgregar.Parameters.Add("@IdHistoria", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters.Add("@Observaciones", System.Data.SqlDbType.VarChar);
+                cmdAgregar.Parameters.Add("@estado", System.Data.SqlDbType.VarChar);
+                //ahora los completo
+                cmdAgregar.Parameters["@estado"].Value = "No iniciada";
+                cmdAgregar.Parameters["@Descripcion"].Value = tarea.Descripcion;
+                cmdAgregar.Parameters["@Estimacion"].Value = tarea.Estimacion;
+                cmdAgregar.Parameters["@IdHistoria"].Value = tarea.Historia.Id;
+                cmdAgregar.Parameters["@Observaciones"].Value = tarea.Observaciones;
+                cmdAgregar.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        }
+        public int buscarPorDescripcion(String desc) {
+            try
+            {
+                Conexion.open();
+                SqlCommand query = new SqlCommand("select TOP 1 id from Tareas where Descripcion=@descripcion;", Conexion.cn);
+                query.Parameters.Add("@descripcion", System.Data.SqlDbType.VarChar);
+                query.Parameters["@descripcion"].Value = desc;
+                SqlDataReader reader = query.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                reader.Close();
+                Conexion.close();
+                int id=0;
+                foreach (DataRow dr in dt.Rows)
+                {
+                     id = Convert.ToInt32(dr["Id"]);
+                }
 
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }      
+        }
+        public void setearEstado(String est, int id) {
+            try
+            {
+                Conexion.open();
+                String cmd = "update tareas set estado=@estado where Id=@id";
+                SqlCommand cmdAgregar = new SqlCommand(cmd, Conexion.cn);
+                //paso parametros
+                cmdAgregar.Parameters.Add("@estado", System.Data.SqlDbType.VarChar);
+                cmdAgregar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters["@estado"].Value = est;
+                cmdAgregar.Parameters["@id"].Value = id;
+                cmdAgregar.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        
+        }
+        public void setearFechaInicio(DateTime fi,int idd) {
+            try
+            {
+                Conexion.open();
+                String cmd = "update tareas set inicio=@inicio where Id=@id";
+                SqlCommand cmdAgregar = new SqlCommand(cmd, Conexion.cn);
+                //paso parametros
+                cmdAgregar.Parameters.Add("@Inicio", System.Data.SqlDbType.DateTime);
+                cmdAgregar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters["@Inicio"].Value = fi;
+                cmdAgregar.Parameters["@id"].Value = idd;
+                cmdAgregar.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+        
+        }
+        public void setearFechaFin(DateTime ff, int idd)
+        {
+            try
+            {
+                Conexion.open();
+                String cmd = "update tareas set fin=@fin where Id=@id";
+                SqlCommand cmdAgregar = new SqlCommand(cmd, Conexion.cn);
+                //paso parametros
+                cmdAgregar.Parameters.Add("@fin", System.Data.SqlDbType.DateTime);
+                cmdAgregar.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+                cmdAgregar.Parameters["@fin"].Value = ff;
+                cmdAgregar.Parameters["@id"].Value = idd;
+                cmdAgregar.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Conexion.close();
+            }
+
+        }
+       
         public Tarea buscarPorID(int ID)
         {
             try{
