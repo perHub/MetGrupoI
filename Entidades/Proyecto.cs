@@ -36,5 +36,11 @@ namespace Entidades
             this.Nombre = nombre;
             this.oEmpresa = oEmp;
         }
+
+        public Proyecto(string nombre)
+        {
+            this.Nombre = nombre;
+        }
+
     }
 }

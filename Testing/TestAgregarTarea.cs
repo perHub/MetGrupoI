@@ -12,7 +12,7 @@ namespace Testing
 {
     
     [TestFixture]
-    class TestAgregarTarea
+    class TestAgregarTarea              // Este test verifica que el almacenamiento de una 'tarea' se realiza correctamente en la base de datos.
     {
         Tarea T;
 
@@ -36,7 +36,7 @@ namespace Testing
              descripcion = "Codificar UI";
              estimacion = 2;
              observaciones = "Preguntar al cliente";
-             IdHistoria = 9;
+             IdHistoria = 12;
 
             T = null;
             CHistoria CH = new CHistoria();

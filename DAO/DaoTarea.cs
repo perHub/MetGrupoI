@@ -270,7 +270,7 @@ namespace DAO
             }
         
         }
-        public void agregarEstadoTareaConNombre(EstadoTarea et, string descripcion)
+        public void agregarEstadoTareaConNombre(EstadoTarea et, string descripcion) // Preguntar sobre este método.
         {
             try
             {

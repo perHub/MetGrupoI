@@ -15,5 +15,13 @@ namespace Controladora
             return DPro.buscarPorID(id);
         
         }
+
+        //este método va sin empresa para poder usarlo en el test
+       public void Agregar(String nombre)
+       {
+           Proyecto miProyecto = new Proyecto(nombre);
+           DPro.agregar(miProyecto);
+       }
+
     }
 }

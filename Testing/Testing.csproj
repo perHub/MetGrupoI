@@ -48,6 +48,9 @@
     <Compile Include="TestAgregarTarea.cs" />
     <Compile Include="TestBorrarSprintConHistorias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestNoSePuedeAsignarTareaAsignada.cs" />
+    <Compile Include="TestNoSePuedeCrearProyectoSinEmpresa.cs" />
+    <Compile Include="testVariosEstadosMismoMomento.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controladora\Controladora.csproj">
