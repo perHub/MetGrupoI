@@ -11,20 +11,20 @@ namespace Entidades
         string direccion;
         string nombre;
 
-        public string Nombre
+        public virtual string Nombre
         {
             get { return nombre; }
             set { nombre = value; }
         }
 
-        public int Id
+        public virtual int Id
         {
             get { return id; }
             set { id = value; }
         }
 
 
-        public string Direccion
+        public virtual string Direccion
         {
             get { return direccion; }
             set { direccion = value; }
