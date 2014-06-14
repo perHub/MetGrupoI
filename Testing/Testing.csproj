@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cAccesoDBTest.cs" />
+    <Compile Include="NHibernateModificarEmpresa.cs" />
     <Compile Include="NHibernateTestTraerTodos.cs" />
     <Compile Include="NoSePuedeAgregarHistoriaConMismaDescripcion.cs" />
     <Compile Include="TestAgregarEmpresaNHibernate.cs" />
