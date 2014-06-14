@@ -36,7 +36,7 @@ namespace ProyectoScrum
             EstimacionTXT.Text = Convert.ToString(tarea.Estimacion);
             txtDesc.Text = tarea.Descripcion;
             try{
-            DropEstados.SelectedIndex = -1;
+            //DropEstados.SelectedIndex = -1;
             DropEstados.Items.FindByText(tarea.Estado).Selected = true;
             }catch (Exception ex){
             
@@ -102,6 +102,12 @@ namespace ProyectoScrum
             }
             Response.Redirect("/sprint_actual.aspx");
             
+        }
+
+        protected void DropEstados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropEstados.Items.FindByText(tarea.Estado).Selected = false;
+            nuevoEstado = DropEstados.SelectedValue;
         }
 
 

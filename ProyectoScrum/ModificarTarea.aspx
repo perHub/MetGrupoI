@@ -31,7 +31,8 @@
      </table>
     <p>
         <asp:Label ID="Label1" runat="server" Text="Estado  "></asp:Label>
-        <asp:DropDownList ID="DropEstados" runat="server" >
+        <asp:DropDownList ID="DropEstados" runat="server" 
+            onselectedindexchanged="DropEstados_SelectedIndexChanged" >
         </asp:DropDownList>
     </p>
     <p>
