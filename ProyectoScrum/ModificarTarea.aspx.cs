@@ -15,7 +15,7 @@ namespace ProyectoScrum
         CEstados cestados = new CEstados();
         CTarea ctarea = new CTarea();
         Tarea tarea;
-        string nuevoEstado;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             historiaDropDown.DataTextField = "descripcion";
@@ -38,8 +38,10 @@ namespace ProyectoScrum
             try{
             //DropEstados.SelectedIndex = -1;
             DropEstados.Items.FindByText(tarea.Estado).Selected = true;
-            }catch (Exception ex){
-            
+
+            }
+            catch (Exception ex){
+                alert.mostrarExAlert(ex, this);
             }
         }
 

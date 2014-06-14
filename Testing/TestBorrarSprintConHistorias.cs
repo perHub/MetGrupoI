@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Entidades;
+using DAO;
+using Controladora;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Testing
 {
@@ -12,20 +15,25 @@ namespace Testing
     public class TestBorrarSprintConHistorias
     {
 
-        Sprint sprTest;
-        Proyecto oPro;
+        Sprint S;
+        CSprint CS;
 
         [SetUp]
         public void SetUp()
         {
-            sprTest = new Sprint(1, null, Convert.ToDateTime(null), Convert.ToDateTime(null), "S1", null);
-            oPro = new Proyecto();
+            CS = new CSprint();
+            S = null;
+            S = CS.buscarPorId(1);
         }
 
-       /* [Test]
-        [ExpectedException(typeof(NoNullAllowedException))]*/
-
-
-
+        [Test]
+        [ExpectedException("System.Data.SqlClient.SqlException")]
+        public void TestBorrar()
+        {
+            Conexion.open();
+            //cableo la eliminación trayendo un sprint que se que tiene historias aunque debería primero hacer una consulta trayendo un sprint con historias y luego borrar ese
+            SqlCommand cmd = new SqlCommand("DELETE from Sprints WHERE Id = 1", Conexion.cn);
+            cmd.ExecuteNonQuery();
+        }
     }
 }
