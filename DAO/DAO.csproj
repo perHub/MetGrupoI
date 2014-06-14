@@ -49,6 +49,7 @@
     <Compile Include="DAOhabilidades.cs" />
     <Compile Include="DAOHistoria.cs" />
     <Compile Include="DAOEmpresa.cs" />
+    <Compile Include="DAOHistoriaNH.cs" />
     <Compile Include="DAOProyecto.cs" />
     <Compile Include="DAOSprint.cs" />
     <Compile Include="DAOUsuario_Sistema.cs" />
