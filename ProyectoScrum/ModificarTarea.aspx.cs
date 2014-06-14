@@ -15,6 +15,7 @@ namespace ProyectoScrum
         CEstados cestados = new CEstados();
         CTarea ctarea = new CTarea();
         Tarea tarea;
+        String nuevoEstado;
 
         protected void Page_Load(object sender, EventArgs e)
         {

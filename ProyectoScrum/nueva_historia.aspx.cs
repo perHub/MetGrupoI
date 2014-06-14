@@ -24,8 +24,14 @@ namespace ProyectoScrum
             Proyecto oPro = new Proyecto();
             int nId = ((Proyecto)Session["ProyectoActual"]).Id;
             oPro = listProy.buscarPorId(nId);
-            historia.agregar(txtDescripcion.Text, Convert.ToDecimal(txtEstimacion.Text), Convert.ToInt32(txtPrioridad.Text), oPro, Convert.ToInt32(txtNumero.Text));
-            Response.Redirect("/product_backlog.aspx");
+            try
+            {
+                historia.agregar(txtDescripcion.Text, Convert.ToDecimal(txtEstimacion.Text), Convert.ToInt32(txtPrioridad.Text), oPro, Convert.ToInt32(txtNumero.Text));
+                Response.Redirect("/product_backlog.aspx");
+            }
+            catch (Exception ex) { 
+            
+            }
         }
     }
 }

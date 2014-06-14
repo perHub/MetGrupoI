@@ -77,7 +77,6 @@ namespace Entidades
         public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
                             DateTime Inicio, DateTime Fin, int num){
             this.id = id;
-            //this.depende = depende;
             this.descripcion=descripcion;
             this.estimacion=estimacion;
             this.prioridad = prioridad;
