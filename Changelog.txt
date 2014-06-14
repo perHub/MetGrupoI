@@ -1,0 +1,7 @@
+Pedro: 19/04 - Agregado un control GridView en el apartado "Sprint actual" que listará las tareas.
+			 - Algunas correciones.
+			 
+Pedro: 18/04 - El sprint backlog y el product backlog comparten la misma Master Page con una grilla que será cargada por listas de HU.
+			 - Agregada la interfaz del DAO (IDAO) (posiblemente falten métodos).
+			 
+Pedro: 17/04 Agregado GridView funcional en el template, clases de las entidades declaradas como públicas.
