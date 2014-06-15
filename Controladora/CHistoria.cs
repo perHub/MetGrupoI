@@ -20,10 +20,11 @@ namespace Controladora
 
        public void agregar(string desc, decimal est, int prio, Proyecto oPro, int Num)
        {
-           Historia h = dHu.historiaBYString(desc,oPro.Id);
+           
              if(desc == null || oPro==null ){
                 throw new Exception("no se puede guardar revise campos");
             }
+             Historia h = dHu.historiaBYString(desc, oPro.Id);
              if (h != null && oPro.Id == h.oProyecto.Id) {
                  throw new Exception("ya existe historia con esa descripcion");
              }

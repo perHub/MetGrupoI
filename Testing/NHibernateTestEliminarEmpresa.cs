@@ -31,7 +31,7 @@ namespace Testing
 
             //miEmp = sesion.CreateQuery("from Empresa WHERE Id=5 Select Empresa").List<Empresa>().First(); //LINQ
             //no está bueno esto, sería ideal buscar un id existente
-            miEmp = sesion.Get<Empresa>(9);
+            miEmp = sesion.Get<Empresa>(1);
 
         }
 
