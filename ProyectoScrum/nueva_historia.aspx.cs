@@ -29,8 +29,8 @@ namespace ProyectoScrum
                 historia.agregar(txtDescripcion.Text, Convert.ToDecimal(txtEstimacion.Text), Convert.ToInt32(txtPrioridad.Text), oPro, Convert.ToInt32(txtNumero.Text));
                 Response.Redirect("/product_backlog.aspx");
             }
-            catch (Exception ex) { 
-            
+            catch (Exception ex) {
+                alert.mostrarExAlert(ex, this);
             }
         }
     }

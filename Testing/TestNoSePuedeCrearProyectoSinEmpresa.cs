@@ -13,13 +13,11 @@ namespace Testing
     [TestFixture]
     class TestNoSePuedeCrearProyectoSinEmpresa
     {
-        Proyecto P;
         CProyecto CP = new CProyecto();
 
         [SetUp]
         public void SetUp()
         {
-            P = null;
             CP = new CProyecto();
 
         }
