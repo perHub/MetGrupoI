@@ -20,7 +20,7 @@ namespace Controladora
 
        public void agregar(string desc, decimal est, int prio, Proyecto oPro, int Num)
        {
-           Historia h = dHu.historiaBYString(desc);
+           Historia h = dHu.historiaBYString(desc,oPro.Id);
              if(desc == null || oPro==null ){
                 throw new Exception("no se puede guardar revise campos");
             }
@@ -41,8 +41,8 @@ namespace Controladora
         {
             return dHu.historiasPorSrpint(idspr);
         }
-        public Historia historiaBYDescripcion(String descripcion) {
-            return dHu.historiaBYString(descripcion);
+        public Historia historiaBYDescripcion(String descripcion,int idP) {
+            return dHu.historiaBYString(descripcion,idP);
         }
 
         public Historia buscarPorId(int id)

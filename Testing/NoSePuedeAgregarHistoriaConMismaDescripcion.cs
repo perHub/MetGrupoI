@@ -25,7 +25,10 @@ namespace Testing
         [ExpectedException(typeof(Exception))]
         public void testAgregaHistoria()
         {
+            //Con este anda
             chi.agregar("Crear Proyecto", 1, 1, p, 1);
+            //Con este NO anda
+            //chi.agregar("Prueba para fallar test", 1, 1, p, 1);
         }
 
 
