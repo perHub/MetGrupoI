@@ -11,19 +11,19 @@ namespace Entidades
         string nombre;
         Empresa oempresa;
 
-        public int Id
+        public virtual int Id
         {
             get { return id; }
             set { id = value; }
         }
 
-        public string Nombre
+        public virtual string Nombre
         {
             get { return nombre; }
             set { nombre = value; }
         }
 
-        public Empresa oEmpresa
+        public virtual Empresa oEmpresa
         {
             get { return oempresa; }
             set { oempresa = value; }

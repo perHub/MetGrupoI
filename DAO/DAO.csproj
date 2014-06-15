@@ -52,13 +52,18 @@
     <Compile Include="DAOHistoriaNH.cs" />
     <Compile Include="DAOProyecto.cs" />
     <Compile Include="DAOSprint.cs" />
+    <Compile Include="DAOSprintNHibernate.cs" />
     <Compile Include="DAOUsuario_Sistema.cs" />
     <Compile Include="DaoTarea.cs" />
     <Compile Include="IDAO.cs" />
+    <Compile Include="NHHelper.cs" />
     <Compile Include="noPuedeCambiarseResponsableException.cs" />
     <Compile Include="YaPoseeEstadoEnEseMomentoException.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="NHibernate">
+      <HintPath>..\NH\Required_Bins\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />

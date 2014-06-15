@@ -17,62 +17,63 @@ namespace Entidades
         Sprint osprint;
         int numero;
 
-        public DateTime Inicio
+        public virtual DateTime Inicio
         {
             get { return inicio; }
             set { inicio = value; }
         }
         DateTime fin;
 
-        public DateTime Fin
+        public virtual DateTime Fin
         {
             get { return fin; }
             set { fin = value; }
         }
 
-        public int Id
+        public virtual int Id
         {
             get { return id; }
             set { id = value; }
         }
 
 
-        public string Descripcion
+        public virtual string Descripcion
         {
             get { return descripcion; }
             set { descripcion = value; }
         }
 
-        public decimal Estimacion
+        public virtual decimal Estimacion
         {
             get { return estimacion; }
             set { estimacion = value; }
         }
 
-        public int Prioridad
+        public virtual int Prioridad
         {
             get { return prioridad; }
             set { prioridad = value; }
         }
 
-        public Proyecto oProyecto
+        public virtual Proyecto oProyecto
         {
             get { return oproyecto; }
             set { oproyecto = value; }
         }
 
-        public Sprint oSprint
+        public virtual Sprint oSprint
         {
             get { return osprint; }
             set { osprint = value; }
         }
 
-        public int Numero
+        public virtual int Numero
         {
             get { return numero; }
             set { numero = value; }
         }
 
+        public Historia() { }
 
         public Historia(int id, string descripcion,decimal estimacion, int prioridad,Proyecto proyecto, Sprint sprint,
                             DateTime Inicio, DateTime Fin, int num){

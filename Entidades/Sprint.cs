@@ -12,48 +12,48 @@ namespace Entidades
         DateTime inicio;
         DateTime fin;
         String nombre;
-       List<Historia> historias;
+       IList<Historia> historias;
        List<Tarea> tareas;
 
-       public List<Tarea> Tareas
+       public virtual List<Tarea> Tareas
        {
            get { return tareas; }
            set { tareas = value; }
        }
 
-        public int Id
+        public virtual int Id
         {
             get { return id; }
             set { id = value; }
         }
 
-        public Proyecto Proyecto
+        public virtual Proyecto Proyecto
         {
             get { return proyecto; }
             set { proyecto = value; }
         }
 
 
-        public DateTime Incio
+        public virtual DateTime Incio
         {
             get { return inicio; }
             set { inicio = value; }
         }
 
 
-        public DateTime Fin
+        public virtual DateTime Fin
         {
             get { return fin; }
             set { fin = value; }
         }
 
-        public String Nombre
+        public virtual String Nombre
         {
             get { return nombre; }
             set { nombre = value; }
         }
 
-        public List<Historia> Historias
+        public virtual IList<Historia> Historias
         {
             get { return historias; }
             set { historias = value; }

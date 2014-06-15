@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Entidades" namespace="Entidades" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Historia" table="Historias" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <many-to-one name="oProyecto" lazy="false">
+      <column name="IdProyecto" sql-type="int" not-null="true" />
+    </many-to-one>
+    <many-to-one name="oSprint" column="IdSprint" lazy="false">
+    </many-to-one>
+    <property name="Descripcion">
+      <column name="Descripcion" sql-type="varchar" not-null="true" />
+    </property>
+    <property name="Estimacion">
+      <column name="Estimacion" sql-type="numeric" not-null="false" />
+    </property>
+    <property name="Prioridad">
+      <column name="Prioridad" sql-type="int" not-null="false" />
+    </property>
+    <property name="Inicio">
+      <column name="Inicio" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Fin">
+      <column name="Fin" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Numero">
+      <column name="Numero" sql-type="int" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>
