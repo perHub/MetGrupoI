@@ -21,9 +21,6 @@
       <key column="idSprint"/>
       <one-to-many class="Historia" />
     </bag>
-    <bag name="Tareas" table="Historias" lazy="false" fetch="join" inverse="true">
-      <key column="IdSprint"></key>
-      <many-to-many class="Tarea" column="Id"/>
-    </bag>
+
   </class>
 </hibernate-mapping>

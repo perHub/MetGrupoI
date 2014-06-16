@@ -62,7 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mapping\Proyecto.hbm.xml" />
-    <EmbeddedResource Include="Mapping\Sprint.hbm.xml" />
+    <EmbeddedResource Include="Mapping\Sprint.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mapping\Historia.hbm.xml">
