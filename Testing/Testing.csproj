@@ -52,7 +52,7 @@
     <Compile Include="NHibernateTestEliminarEmpresa.cs" />
     <Compile Include="NHibernateTestTraerTodos.cs" />
     <Compile Include="NoSePuedeAgregarHistoriaConMismaDescripcion.cs" />
-    <Compile Include="TestAgregarEmpresaNHibernate.cs" />
+    <Compile Include="NHibernateTestAgregarEmpresa.cs" />
     <Compile Include="TestAgregarTarea.cs" />
     <Compile Include="TestBorrarSprintConHistorias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

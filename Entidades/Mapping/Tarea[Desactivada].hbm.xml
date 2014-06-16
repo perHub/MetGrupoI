@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="Entidades" assembly="Entidades" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Tarea" table="Tareas" schema="dbo" lazy="false">
+    <id name="Id" type="Int32">
+      <column name="Id" not-null="true" precision="10" scale="0" sql-type="int" />
+      <generator class="identity" />
+    </id>
+    <property name="Descripcion" type="String">
+      <column name="Descripcion" not-null="true" sql-type="varchar" />
+    </property>
+    <property name="Estimacion" type="Decimal">
+      <column name="Estimacion" not-null="false" precision="10" scale="1" sql-type="decimal" />
+    </property>
+    <property name="Incio" type="DateTime">
+      <column name="Inicio" not-null="false" sql-type="datetime" />
+    </property>
+    <property name="Fin" type="DateTime">
+      <column name="Fin" not-null="false" sql-type="datetime" />
+    </property>
+    <property name="Observaciones" type="String">
+      <column name="Observaciones" not-null="false" sql-type="varchar" />
+    </property>
+    <property name="Estado" type="String">
+      <column name="estado" not-null="false" length="45" sql-type="varchar" />
+    </property>
+    <many-to-one name="Historia" class="Historia">
+      <column name="IdHistoria" not-null="true" precision="10" scale="0" sql-type="int" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

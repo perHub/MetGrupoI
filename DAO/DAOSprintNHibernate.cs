@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Entidades;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace DAO
 {
@@ -100,11 +101,13 @@ namespace DAO
         public List<Sprint> traerTodos()
         {
             ISession sesion = NHHelper.openSession(typeof(Sprint));
-            List<Sprint> lstSprint;
+
             try
             {
                var sprints = sesion.CreateQuery("from Sprint").List<Sprint>();
-               lstSprint = (List<Sprint>)sprints;
+               List<Sprint> lstSprint = (List<Sprint>)sprints;
+
+               return lstSprint;
             }
             catch (Exception ex)
             {
@@ -115,7 +118,50 @@ namespace DAO
                 sesion.Close();
             }
 
-            return lstSprint;
+        }
+
+        public List<Historia> SprintBackLog(Sprint miSprint)
+        {
+            ISession sesion = NHHelper.openSession(typeof(Sprint));
+            try
+            {
+                var rtr = sesion.CreateCriteria(typeof(Historia))
+                           .Add(Restrictions.Eq("oSprint.Id",miSprint.Id))
+                           .List<Historia>();
+
+                return (List <Historia>) rtr;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sesion.Close();
+            }
+        }
+
+        public List<Sprint> sprintsPorProyecto(Proyecto oPro)
+        {
+            ISession sesion = NHHelper.openSession(typeof(Sprint));
+            try
+            {
+                var rtr = sesion.CreateCriteria(typeof(Sprint))
+                           .Add(Restrictions.Eq("Proyecto.Id",oPro.Id))
+                           .List<Sprint>();
+
+                return (List <Sprint>) rtr;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sesion.Close();
+            }
         }
     }
+
+
 }

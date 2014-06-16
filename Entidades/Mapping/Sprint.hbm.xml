@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping namespace="Entidades" assembly="Entidades" xmlns="urn:nhibernate-mapping-2.2">
-  <class name="Sprint" table="Sprints" schema="dbo">
+  <class name="Sprint" table="Sprints" schema="dbo" lazy="false">
     <id name="Id" type="Int32">
       <column name="Id" not-null="true" precision="10" scale="0" sql-type="int" />
       <generator class="identity" />
@@ -21,6 +21,5 @@
       <key column="idSprint"/>
       <one-to-many class="Historia" />
     </bag>
-
   </class>
 </hibernate-mapping>

@@ -11,7 +11,7 @@ using Entidades;
 namespace Testing
 {
     [TestFixture]
-    class TestAgregarEmpresaNHibernate
+    class NHibernateTestAgregarEmpresa
     {
         Configuration cfg;
         ISession sesion;

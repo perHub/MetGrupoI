@@ -13,9 +13,9 @@ namespace Entidades
         DateTime fin;
         String nombre;
        IList<Historia> historias;
-       List<Tarea> tareas;
+       IList<Tarea> tareas;
 
-       public virtual List<Tarea> Tareas
+       public virtual IList<Tarea> Tareas
        {
            get { return tareas; }
            set { tareas = value; }

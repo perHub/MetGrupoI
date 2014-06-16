@@ -9,7 +9,8 @@ namespace Controladora
 {
     public class CSprint
     {
-        DAOSprint DSpr = DAOSprint.Instance();
+       // DAOSprint DSpr = DAOSprint.Instance();
+        DAOSprintNHibernate DSpr = DAOSprintNHibernate.Instance(); //DAO con NHibernate
 
         public Sprint buscarPorId(int id)
         {

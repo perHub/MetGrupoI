@@ -68,5 +68,21 @@ namespace Testing		// Esta clase está MUY mal hecha con propósitos de debuggin
              List<Sprint> lstSpr = dSpr.traerTodos();
              int i = lstSpr.Count;
          }
+
+         [Test]
+         public void productBacklog()
+         {
+             Sprint spr = dSpr.buscarPorID(1);
+             var hax = dSpr.SprintBackLog(spr);
+             Boolean a = (0 == 0);
+         }
+
+         [Test]
+         public void sprintsPorProyecto()
+         {
+             Proyecto oProy = new Proyecto(1,"test",oEmp);
+            var test = dSpr.sprintsPorProyecto(oProy);
+            Boolean a = (0 == 0);
+         }
     }
 }
