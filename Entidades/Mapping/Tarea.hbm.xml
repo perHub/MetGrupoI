@@ -23,8 +23,7 @@
     <property name="Estado" type="String">
       <column name="estado" not-null="false" length="45" sql-type="varchar" />
     </property>
-    <many-to-one name="Historia" class="Historia">
-      <column name="IdHistoria" not-null="true" precision="10" scale="0" sql-type="int" />
+    <many-to-one name="Historia" class="Historia" column="IdHistoria">
     </many-to-one>
   </class>
 </hibernate-mapping>

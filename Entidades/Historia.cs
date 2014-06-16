@@ -16,6 +16,13 @@ namespace Entidades
         Proyecto oproyecto;
         Sprint osprint;
         int numero;
+        IList<Tarea> tareas;
+
+        public IList<Tarea> Tareas
+        {
+            get { return tareas; }
+            set { tareas = value; }
+        }
 
         public virtual DateTime Inicio
         {

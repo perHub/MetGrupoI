@@ -27,5 +27,9 @@
     <property name="Numero">
       <column name="Numero" sql-type="int" not-null="false" />
     </property>
+    <bag name="Tareas" lazy="false" inverse="true" cascade="all">
+      <key column="idHistoria"/>
+      <one-to-many class="Tarea" />
+    </bag>
   </class>
 </hibernate-mapping>
